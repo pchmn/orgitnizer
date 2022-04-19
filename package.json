@@ -1,0 +1,42 @@
+{
+  "name": "@orgitnizer/monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Organize your git projects (repos, gists, stars)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pchmn/orgitnizer.git"
+  },
+  "author": "pchmn",
+  "license": "MIT",
+  "homepage": "https://github.com/pchmn/orgitnizer",
+  "scripts": {
+    "dev:web": "pnpm --filter @orgitnizer/web run dev",
+    "build:web": "pnpm --filter @orgitnizer/web run build",
+    "serve:web": "pnpm --filter @orgitnizer/web run serve",
+    "test:web": "pnpm --filter @orgitnizer/web run test",
+    "build:ci": "tsc && vite build && cp 404.html dist/",
+    "test:ci": "jest --coverage",
+    "prepare": "husky install && rm -rf .git/hooks && ln -s ../.husky .git/hooks",
+    "lint": "eslint --cache --fix ."
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
+    "@commitlint/prompt-cli": "^13.2.1",
+    "@types/node": "^16.11.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^25.2.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-testing-library": "^4.12.4",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.3",
+    "prettier": "2.4.1",
+    "typescript": "^4.6.3"
+  }
+}

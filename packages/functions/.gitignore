@@ -1,0 +1,12 @@
+dist
+typings/
+node_modules/
+logs
+*.log
+firebase-debug.log*
+firebase-debug.*.log*
+.firebase/
+pids
+*.pid
+*.seed
+*.pid.lock
