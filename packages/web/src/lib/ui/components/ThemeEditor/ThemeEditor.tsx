@@ -1,15 +1,11 @@
 import { ColorPicker, Icon, useThemeSettings } from '@lib/ui';
 import { Box, Button, Center, Group, ModalProps, SegmentedControl, Space, Title } from '@mantine/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function ThemeEditor({ onClose }: Pick<ModalProps, 'onClose'>) {
   const { themeSettings, toggleColorScheme } = useThemeSettings();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    console.log('hello');
-  }, [themeSettings]);
 
   return (
     <>

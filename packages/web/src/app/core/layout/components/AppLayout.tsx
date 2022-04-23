@@ -7,8 +7,6 @@ import { HeaderMenu } from './HeaderMenu';
 export function AppLayout({ children }: PropsWithChildren<unknown>) {
   const theme = useMantineTheme();
 
-  console.log('theme', theme);
-
   return (
     <>
       <FlexLayout style={{ minHeight: '100vh' }} spacing={0}>
