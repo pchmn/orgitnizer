@@ -1,4 +1,6 @@
 import App from '@app/App';
+import '@app/core/i18n';
+import '@conf/firebase';
 import isPropValid from '@emotion/is-prop-valid';
 import { VokerUiProvider } from '@lib/ui';
 import { useMantineTheme } from '@mantine/core';
@@ -7,7 +9,6 @@ import { shouldForwardProp } from 'goober/should-forward-prop';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import './app/core/i18n';
 import './index.css';
 
 const queryClient = new QueryClient();
