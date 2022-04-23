@@ -1,0 +1,38 @@
+import { useEffect, useMemo, useState } from 'react';
+import { HTML5Store, StorageChangeEvent, StorageType } from '..';
+
+interface Options<T> {
+  key: string;
+  defaultValue?: T;
+  storage?: StorageType;
+}
+
+export function useStorage<T>({
+  key,
+  defaultValue,
+  storage
+}: Options<T>): [T | undefined, (value: T | ((prevState: T | undefined) => T)) => void, () => void] {
+  const store = useMemo(() => new HTML5Store<T>(storage), [storage]);
+  const [value, setValue] = useState(store.get(key, defaultValue));
+
+  useEffect(() => {
+    const listener = ((event: StorageChangeEvent<T>) => {
+      if (event.detail.value !== value) {
+        setValue(event.detail.value);
+      }
+    }) as EventListener;
+    store.watch(key, listener);
+
+    return () => {
+      store.unwatch(key);
+    };
+  }, [key, store, value]);
+
+  const set = (newValue: T | ((prevState: T | undefined) => T)) => {
+    setValue(newValue);
+  };
+
+  const remove = () => store.remove(key);
+
+  return [value, set, remove];
+}
