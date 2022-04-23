@@ -19,13 +19,24 @@ module.exports = {
       version: 'detect'
     }
   },
+  rules: {
+    'prettier/prettier': ['error']
+  },
   overrides: [
     {
       files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
       extends: ['plugin:testing-library/react']
+    },
+    {
+      files: 'packages/web/**',
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            patterns: ['@app/features/*/*', '@lib/*/*', '@app/shared/*/*', '@app/core/*/*']
+          }
+        ]
+      }
     }
-  ],
-  rules: {
-    'prettier/prettier': ['error']
-  }
+  ]
 };
