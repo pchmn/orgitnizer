@@ -33,7 +33,7 @@ module.exports = {
         'no-restricted-imports': [
           'error',
           {
-            patterns: ['@app/features/*/*', '@lib/*/*', '@app/shared/*/*', '@app/core/*/*']
+            patterns: ['@app/modules/*/*', '@lib/*/*', '@app/shared/*/*', '@app/core/*/*']
           }
         ]
       }

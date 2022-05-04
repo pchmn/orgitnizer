@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.1.2",
-    "@mantine/core": "^4.1.4",
-    "@mantine/hooks": "^4.1.4",
+    "@mantine/core": "^4.2.2",
+    "@mantine/hooks": "^4.2.2",
     "@tanstack/react-location": "^3.7.4",
     "add": "^2.0.6",
     "firebase": "^9.6.11",
