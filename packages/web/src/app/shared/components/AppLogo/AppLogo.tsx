@@ -1,4 +1,5 @@
-import { keyframes, MantineNumberSize, Title, useMantineTheme } from '@mantine/core';
+import { FlexLayout } from '@lib/ui';
+import { keyframes, MantineNumberSize, Title } from '@mantine/core';
 import { styled } from 'goober';
 import React from 'react';
 import { DynamicLogo } from '..';
@@ -62,27 +63,17 @@ interface AppLogoProps {
 }
 
 export function AppLogo({ direction = 'column', size = 'sm', animate = false, onAnimationEnd, onClick }: AppLogoProps) {
-  const theme = useMantineTheme();
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: direction,
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: theme.fn.size({ size, sizes: theme.spacing }) + 'px'
-      }}
-      onClick={onClick}
-    >
+    <FlexLayout direction={direction} alignItems="center" spacing={size} onClick={onClick}>
       <Logo animate={+animate} size={size} />
       <AppName
         animate={+animate}
-        order={size === 'sm' ? 2 : 1}
+        order={size === 'sm' ? 3 : 2}
         onAnimationEnd={onAnimationEnd}
         style={{ fontFamily: "'JetBrains Mono', monospace" }}
       >
-        Voker
+        Orgitnizer
       </AppName>
-    </div>
+    </FlexLayout>
   );
 }
