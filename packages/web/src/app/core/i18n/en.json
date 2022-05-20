@@ -24,5 +24,15 @@
       "light": "Light",
       "validate": "Validate"
     }
+  },
+  "signIn": {
+    "title": "Organize your Github projects",
+    "description": "Manage and search your starred and own repositories by tags, languages and more.",
+    "signInWithGitHub": "Sign in with GitHub",
+    "notificationError": {
+      "title": "Oups",
+      "message": "An error occured while signing in to your GitHub account",
+      "messageRefused": "You have refused the access to your GitHub account"
+    }
   }
 }

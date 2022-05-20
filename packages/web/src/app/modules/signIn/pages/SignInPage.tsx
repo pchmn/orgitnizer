@@ -1,6 +1,10 @@
-import React from 'react';
 import { SignIn } from '../components/SignIn';
+import { SignInLayout } from '../layout';
 
 export function SignInPage() {
-  return <SignIn />;
+  return (
+    <SignInLayout>
+      <SignIn />
+    </SignInLayout>
+  );
 }

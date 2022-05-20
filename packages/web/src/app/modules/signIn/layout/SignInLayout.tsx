@@ -2,7 +2,7 @@ import { AppLayout, Header } from '@app/core/layout';
 import { GithubIcon } from '@app/shared/components';
 import { FlexLayout } from '@lib/ui';
 import { ActionIcon, MantineTheme, Space, Text, useMantineTheme } from '@mantine/core';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 export function SignInLayout({ children }: PropsWithChildren<unknown>) {
   const theme = useMantineTheme();

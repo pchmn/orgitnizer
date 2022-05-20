@@ -1,15 +1,21 @@
 import {
   getAuth,
+  getRedirectResult,
+  GithubAuthProvider,
+  OAuthCredential,
   onAuthStateChanged,
-  signInAnonymously,
+  signInWithRedirect,
   signOut as firebaseSignOut,
   Unsubscribe,
-  User,
-  UserCredential
+  updateProfile,
+  User
 } from 'firebase/auth';
-import { useEffect, useMemo, useRef } from 'react';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { Options } from '../models/options.model';
+
+const provider = new GithubAuthProvider().addScope('read:user,gist');
 
 export function useFirebaseAuth(options: Options = { listen: true }) {
   const unsubscribe = useRef<Unsubscribe>();
@@ -46,9 +52,32 @@ export function useFirebaseAuth(options: Options = { listen: true }) {
     { staleTime: options.listen ? Infinity : 0 }
   );
 
-  const signIn: () => Promise<UserCredential> = () => signInAnonymously(auth);
+  const signIn: () => Promise<void> = useCallback(() => signInWithRedirect(auth, provider), [auth]);
 
-  const signOut: () => Promise<void> = () => firebaseSignOut(auth);
+  const signOut: () => Promise<void> = useCallback(() => firebaseSignOut(auth), [auth]);
 
-  return { currentUser: data, isLoading: isLoading || isFetching, error, signIn, signOut };
+  const getGithuRedirectResult: () => Promise<{ user: User; credential: OAuthCredential | null } | null> =
+    useCallback(async () => {
+      const result = await getRedirectResult(auth);
+      if (!result) {
+        return null;
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await updateProfile(result.user, { displayName: (result.user as any).reloadUserInfo?.screenName });
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      // Save accessToken for future use
+      await setDoc(doc(getFirestore(), `users/${result.user.uid}`), { accessToken: credential?.accessToken });
+      // Update query data
+      queryClient.setQueryData<User | null>('firebaseAuth', result.user);
+      return { user: result.user, credential };
+    }, [auth, queryClient]);
+
+  return {
+    currentUser: data,
+    isLoading: isLoading || isFetching,
+    error,
+    signIn,
+    signOut,
+    getGithuRedirectResult
+  };
 }

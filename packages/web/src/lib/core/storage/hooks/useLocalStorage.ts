@@ -29,7 +29,6 @@ export function useStorage<T>({
   }, [key, store, value]);
 
   const set = (newValue: T | ((prevState: T | undefined) => T)) => {
-    setValue(newValue);
     store.set(key, newValue instanceof Function ? newValue(value) : newValue);
   };
 
