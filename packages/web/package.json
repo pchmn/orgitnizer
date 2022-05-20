@@ -15,14 +15,17 @@
     "build": "tsc && vite build",
     "build:ci": "tsc && vite build && cp 404.html dist/",
     "test": "vitest",
+    "test:int": "firebase emulators:exec --project test-project 'pnpm vitest'",
     "test:ci": "vitest run --coverage",
     "serve": "vite preview",
     "lint": "eslint --cache --fix ./src"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.1.2",
+    "@firebase/rules-unit-testing": "^2.0.2",
     "@mantine/core": "^4.2.2",
     "@mantine/hooks": "^4.2.2",
+    "@mantine/notifications": "^4.2.4",
     "@tanstack/react-location": "^3.7.4",
     "add": "^2.0.6",
     "firebase": "^9.6.11",
@@ -45,6 +48,6 @@
     "typescript": "^4.6.3",
     "vite": "^2.9.2",
     "vite-tsconfig-paths": "^3.3.17",
-    "vitest": "^0.9.3"
+    "vitest": "^0.12.0"
   }
 }

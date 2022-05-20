@@ -1,17 +1,22 @@
 import App from '@app/App';
-import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
+import { initializeApp } from 'firebase/app';
+import { connectAuthEmulator, getAuth } from 'firebase/auth';
+import { renderWithProvider } from 'src/test.utils';
 
-test('count is 0 at first', () => {
-  render(<App />);
+beforeAll(async () => {
+  const firebase = initializeApp({
+    projectId: 'test-project',
+    apiKey: 'foo'
+  });
 
-  expect(screen.getByText('count is: 0')).toBeDefined();
+  const auth = getAuth(firebase);
+  connectAuthEmulator(auth, 'http://localhost:9099');
 });
 
-test('increments count', () => {
-  render(<App />);
+describe.only('App', () => {
+  test('count is 0 at first', () => {
+    const { container } = renderWithProvider(<App />);
 
-  fireEvent.click(screen.getByRole('button'));
-
-  expect(screen.getByText('count is: 1')).toBeDefined();
+    expect(container).toBeDefined();
+  });
 });

@@ -6,15 +6,16 @@ import { VokerUiProvider } from '@lib/ui';
 import { useMantineTheme } from '@mantine/core';
 import { setup } from 'goober';
 import { shouldForwardProp } from 'goober/should-forward-prop';
-import React from 'react';
+import { createElement } from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import './index.css';
 
 const queryClient = new QueryClient();
 
 setup(
-  React.createElement,
+  createElement,
   undefined,
   useMantineTheme,
   shouldForwardProp((prop) => {
@@ -25,12 +26,10 @@ setup(
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <VokerUiProvider>
-      <QueryClientProvider client={queryClient}>
-        <App />
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      </QueryClientProvider>
-    </VokerUiProvider>
-  </React.StrictMode>
+  <VokerUiProvider>
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  </VokerUiProvider>
 );

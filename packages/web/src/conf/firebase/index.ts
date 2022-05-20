@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfigProd = {
-  apiKey: import.meta.env.ORGITNIZER_API_KEY_PROD,
+  apiKey: import.meta.env.VITE_ORGITNIZER_API_KEY_PROD,
   authDomain: 'voker-c4ea8.firebaseapp.com',
   databaseURL: 'https://voker-c4ea8-default-rtdb.europe-west1.firebasedatabase.app',
   projectId: 'voker-c4ea8',
@@ -11,7 +11,7 @@ const firebaseConfigProd = {
   measurementId: 'G-WDTTGCRGS9'
 };
 const firebaseConfigDev = {
-  apiKey: import.meta.env.ORGITNIZER_API_KEY_DEV,
+  apiKey: import.meta.env.VITE_ORGITNIZER_API_KEY_DEV,
   authDomain: 'orgitnizer-dev.firebaseapp.com',
   projectId: 'orgitnizer-dev',
   storageBucket: 'orgitnizer-dev.appspot.com',
