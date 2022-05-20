@@ -1,6 +1,6 @@
 import { useRouter } from '@tanstack/react-location';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 const variants = {
   initial: {

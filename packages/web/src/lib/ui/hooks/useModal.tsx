@@ -1,5 +1,5 @@
 import { Modal, ModalProps } from '@mantine/core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 type OnCloseProps = { onClose(): void };
 type ModalOptions = Pick<ModalProps, 'size' | 'title'>;

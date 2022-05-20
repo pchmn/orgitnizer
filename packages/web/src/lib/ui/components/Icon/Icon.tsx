@@ -1,5 +1,4 @@
 import { MantineColor, MantineNumberSize, useMantineTheme } from '@mantine/core';
-import React from 'react';
 
 interface IconProps {
   size?: MantineNumberSize;

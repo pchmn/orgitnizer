@@ -1,7 +1,6 @@
 import { FlexLayout } from '@lib/ui';
 import { keyframes, MantineNumberSize, Title } from '@mantine/core';
 import { styled } from 'goober';
-import React from 'react';
 import { DynamicLogo } from '..';
 
 const scale = keyframes({
