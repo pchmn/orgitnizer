@@ -9,15 +9,25 @@ export const defaultProps: Record<string, Record<string, unknown>> = {
 
 export const themeStyles: Record<
   string,
-  Record<string, CSSObject> | ((theme: MantineTheme, params: never) => Record<string, CSSObject>)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Record<string, CSSObject> | ((theme: MantineTheme, params: any) => Record<string, CSSObject>)
 > = {
   Button: (theme, params: ButtonStylesParams) => ({
     filled: {
-      color: getOnColor(params.color as CustomColors, theme)
+      color: getOnColor(params.color as CustomColors, theme),
+      '&:hover': {
+        backgroundColor: theme.fn.darken(getColor(params.color as CustomColors, theme), 0.15)
+      }
     },
     outline: {
       color: getColor(params.color as CustomColors, theme),
       borderColor: theme.other.schemes[theme.colorScheme].outline
+    },
+    loading: {
+      cursor: 'not-allowed',
+      '& svg': {
+        stroke: getOnColor(params.color as CustomColors, theme)
+      }
     }
   }),
   ActionIcon: (theme) => ({

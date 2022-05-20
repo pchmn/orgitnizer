@@ -8,7 +8,8 @@ import {
   TypographyStylesProvider
 } from '@mantine/core';
 import { useColorScheme, useLocalStorage } from '@mantine/hooks';
-import React, { createContext, PropsWithChildren, useContext } from 'react';
+import { NotificationsProvider } from '@mantine/notifications';
+import { createContext, PropsWithChildren, useContext } from 'react';
 import { schemes, themeColors } from './colors';
 import { themeStyles } from './theme';
 
@@ -51,17 +52,19 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
         styles={themeStyles}
         // defaultProps={defaultProps}
       >
-        <Global
-          styles={(theme) => ({
-            body: {
-              ...theme.fn.fontStyles(),
-              backgroundColor: theme.other.schemes[theme.colorScheme].background,
-              color: theme.other.schemes[theme.colorScheme].onBackground,
-              WebkitFontSmoothing: 'antialiased'
-            }
-          })}
-        />
-        <TypographyStylesProvider>{children}</TypographyStylesProvider>
+        <NotificationsProvider>
+          <Global
+            styles={(theme) => ({
+              body: {
+                ...theme.fn.fontStyles(),
+                backgroundColor: theme.other.schemes[theme.colorScheme].background,
+                color: theme.other.schemes[theme.colorScheme].onBackground,
+                WebkitFontSmoothing: 'antialiased'
+              }
+            })}
+          />
+          <TypographyStylesProvider>{children}</TypographyStylesProvider>
+        </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );

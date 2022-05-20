@@ -23,9 +23,10 @@ export interface FlexLayoutProps {
   alignItems?: AlignItems | MixProperties<'safe', AlignItems> | MixProperties<'unsafe', AlignItems> | Globals;
   alignContent?: AlignContent | MixProperties<'safe', AlignContent> | MixProperties<'unsafe', AlignContent> | Globals;
   fullHeight?: boolean;
-  grow?: boolean;
+  growChildren?: boolean;
   spacing?: MantineNumberSize;
   padding?: MantineNumberSize;
+  flexGrow?: number;
 }
 
 export const FlexLayout = styled('div')<FlexLayoutProps>(
@@ -38,8 +39,9 @@ export const FlexLayout = styled('div')<FlexLayoutProps>(
     alignContent,
     fullHeight,
     spacing = 'sm',
-    grow,
+    growChildren,
     padding = 0,
+    flexGrow,
     theme,
     onClick
   }) => ({
@@ -54,8 +56,9 @@ export const FlexLayout = styled('div')<FlexLayoutProps>(
     gap: theme.fn.size({ size: spacing, sizes: theme.spacing }) + 'px',
     padding: theme.fn.size({ size: padding, sizes: theme.spacing }) + 'px',
     '& > *': {
-      flexGrow: grow ? 1 : 0
+      flexGrow: growChildren ? 1 : 0
     },
-    cursor: onClick ? 'pointer' : 'default'
+    cursor: onClick ? 'pointer' : 'default',
+    flexGrow
   })
 );

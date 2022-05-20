@@ -1,6 +1,5 @@
 import { Icon, useThemeColors, useThemeSettings } from '@lib/ui';
 import { createStyles, Group, MantineColor } from '@mantine/core';
-import React from 'react';
 
 export function ColorPicker() {
   const { setPrimaryColor } = useThemeSettings();

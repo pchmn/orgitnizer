@@ -1,5 +1,4 @@
 import { ActionIcon, useMantineColorScheme } from '@mantine/core';
-import React from 'react';
 import { Icon } from '../Icon/Icon';
 
 export function ToggleColorScheme() {
