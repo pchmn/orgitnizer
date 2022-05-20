@@ -1,7 +1,7 @@
 import { AppLogo } from '@app/shared/components';
 import { FlexLayout, ToggleColorScheme } from '@lib/ui';
 import { Header as MantineHeader, MantineTheme } from '@mantine/core';
-import React from 'react';
+import * as React from 'react';
 
 interface HeaderProps {
   theme: MantineTheme;
@@ -20,7 +20,7 @@ export function Header({ theme, left, right }: HeaderProps) {
         borderBottomColor: theme.other.schemes[theme.colorScheme].surface4
       }}
     >
-      <FlexLayout direction="row" alignItems="center" fullHeight grow>
+      <FlexLayout direction="row" alignItems="center" fullHeight growChildren>
         {left}
         <FlexLayout direction="row" justifyContent="space-between" fullHeight alignItems="center">
           <AppLogo direction="row" size="sm" />

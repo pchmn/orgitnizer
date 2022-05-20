@@ -1,6 +1,7 @@
 import { FlexLayout } from '@lib/ui';
 import { ScrollArea } from '@mantine/core';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
+import * as React from 'react';
 
 interface AppLayoutProps {
   header?: React.ReactNode;
@@ -17,7 +18,7 @@ export function AppLayout({ header, footer, children }: PropsWithChildren<AppLay
             <div
               style={{
                 flexGrow: 1,
-                padding: 0
+                display: 'flex'
               }}
             >
               {children}
