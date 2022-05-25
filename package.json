@@ -1,20 +1,20 @@
 {
-  "name": "@orgitnizer/monorepo",
+  "name": "@orgitz/monorepo",
   "version": "0.0.0",
   "private": true,
   "description": "Organize your git projects (repos, gists, stars)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pchmn/orgitnizer.git"
+    "url": "git+https://github.com/pchmn/orgitz.git"
   },
   "author": "pchmn",
   "license": "MIT",
-  "homepage": "https://github.com/pchmn/orgitnizer",
+  "homepage": "https://github.com/pchmn/orgitz",
   "scripts": {
-    "dev:web": "pnpm --filter @orgitnizer/web run dev",
-    "build:web": "pnpm --filter @orgitnizer/web run build",
-    "serve:web": "pnpm --filter @orgitnizer/web run serve",
-    "test:web": "pnpm --filter @orgitnizer/web run test:int",
+    "dev:web": "pnpm --filter @orgitz/web run dev",
+    "build:web": "pnpm --filter @orgitz/web run build",
+    "serve:web": "pnpm --filter @orgitz/web run serve",
+    "test:web": "pnpm --filter @orgitz/web run test:int",
     "build:ci": "tsc && vite build && cp 404.html dist/",
     "test:ci": "jest --coverage",
     "prepare": "husky install && rm -rf .git/hooks && ln -s ../.husky .git/hooks",

@@ -24,7 +24,7 @@ function Footer({ theme }: { theme: MantineTheme }) {
         borderTop: `1px solid ${theme.other.schemes[theme.colorScheme].surface4}`
       }}
     >
-      <Text size="sm">Orgitnizer · Made by pchmn ·</Text>
+      <Text size="sm">Orgitz · Made by pchmn ·</Text>
       <Space w={5} />
       <ActionIcon size="sm">
         <GithubIcon />

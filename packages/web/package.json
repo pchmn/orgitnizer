@@ -1,15 +1,15 @@
 {
-  "name": "@orgitnizer/web",
+  "name": "@orgitz/web",
   "version": "0.0.0",
-  "description": "Orgitnizer web app",
+  "description": "Orgitz web app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pchmn/orgitnizer.git",
+    "url": "git+https://github.com/pchmn/orgitz.git",
     "directory": "packages/web"
   },
   "author": "pchmn",
   "license": "MIT",
-  "homepage": "https://github.com/pchmn/orgitnizer",
+  "homepage": "https://github.com/pchmn/orgitz",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -28,6 +28,7 @@
     "@mantine/notifications": "^4.2.4",
     "@tanstack/react-location": "^3.7.4",
     "add": "^2.0.6",
+    "appwrite": "^8.0.1",
     "firebase": "^9.6.11",
     "framer-motion": "^6.3.0",
     "goober": "^2.1.8",

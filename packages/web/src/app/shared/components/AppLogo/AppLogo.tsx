@@ -71,7 +71,7 @@ export function AppLogo({ direction = 'column', size = 'sm', animate = false, on
         onAnimationEnd={onAnimationEnd}
         style={{ fontFamily: "'JetBrains Mono', monospace" }}
       >
-        Orgitnizer
+        Orgitz
       </AppName>
     </FlexLayout>
   );
