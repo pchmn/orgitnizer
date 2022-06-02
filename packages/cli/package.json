@@ -1,0 +1,32 @@
+{
+  "name": "@orgitz/cli",
+  "version": "0.0.0",
+  "description": "Orgitz cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pchmn/orgitz.git",
+    "directory": "packages/cli"
+  },
+  "author": "pchmn",
+  "license": "MIT",
+  "homepage": "https://github.com/pchmn/orgitz",
+  "bin": {
+    "init-function": "bin/init-function.js"
+  },
+  "scripts": {
+    "build": "pnpm run build-init-function && pnpm run build-deploy-function",
+    "build-init-function": "esbuild src/init-function/index.ts --bundle --minify --platform=node --target=node16.0 --outfile=bin/init-function.js",
+    "build-deploy-function": "esbuild src/deploy-function/index.ts --bundle --minify --platform=node --target=node16.0 --outfile=bin/deploy-function.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "fs-extra": "^10.1.0",
+    "node-appwrite": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^16.11.0",
+    "esbuild": "^0.14.42",
+    "typescript": "^4.6.3"
+  }
+}

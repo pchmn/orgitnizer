@@ -1,4 +1,4 @@
-import { initSdk, Request, Response } from '@shared/appwrite';
+import { initSdk, Request, Response } from '@core/appwrite';
 
 export default async function index(req: Request, res: Response) {
   try {
