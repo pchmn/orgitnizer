@@ -1,24 +1,20 @@
 {
-  "name": "@orgitnizer/functions",
+  "name": "@orgitz/functions",
+  "version": "0.0.0",
+  "description": "Orgitz functions",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pchmn/orgitz.git",
+    "directory": "packages/functions"
+  },
+  "author": "pchmn",
+  "license": "MIT",
+  "homepage": "https://github.com/pchmn/orgitz",
   "scripts": {
-    "build": "tsc",
-    "dev": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "create-function": "pnpm --filter @orgitz/scripts run create-function"
   },
-  "engines": {
-    "node": "16"
-  },
-  "main": "dist/index.js",
   "dependencies": {
-    "firebase-admin": "^10.0.2",
-    "firebase-functions": "^3.18.0"
-  },
-  "devDependencies": {
-    "typescript": "^4.6.3",
-    "firebase-functions-test": "^0.2.0"
-  },
-  "private": true
+    "@octokit/graphql": "^4.8.0",
+    "node-appwrite": "^5.0.0"
+  }
 }
