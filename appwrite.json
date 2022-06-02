@@ -6,8 +6,8 @@
       "$id": "set-github-username",
       "name": "set-github-username",
       "runtime": "node-16.0",
-      "path": "packages/functions/set-github-username",
-      "entrypoint": "dist/index.js",
+      "path": "packages/functions/dist",
+      "entrypoint": "set-github-username.js",
       "ignore": [
         "node_modules",
         "src",

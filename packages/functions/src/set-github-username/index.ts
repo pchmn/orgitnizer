@@ -1,5 +1,5 @@
-import { initSdk, Request, Response } from '@shared/appwrite';
-import { initGithubGraphql } from '@shared/github';
+import { initSdk, Request, Response } from '@core/appwrite';
+import { initGithubGraphql } from '@core/github';
 import { Account } from 'node-appwrite';
 
 export default async function index(req: Request, res: Response) {
@@ -23,7 +23,7 @@ async function updateAccountName(account: Account) {
   } = await graphql<{ viewer: { login: string } }>(`
     {
       viewer {
-        login: String
+        login
       }
     }
   `);
