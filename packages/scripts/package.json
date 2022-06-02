@@ -1,0 +1,25 @@
+{
+  "name": "@orgitz/scripts",
+  "version": "0.0.0",
+  "description": "Orgitz scripts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pchmn/orgitz.git",
+    "directory": "packages/scripts"
+  },
+  "author": "pchmn",
+  "license": "MIT",
+  "homepage": "https://github.com/pchmn/orgitz",
+  "scripts": {
+    "create-function": "ts-node ./src/create-function/create-function.ts"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^16.11.0",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "fs-extra": "^10.1.0"
+  }
+}
