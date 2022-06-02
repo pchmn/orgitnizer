@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import fs from 'fs-extra';
 import { FunctionConfig } from '../models/functionConfig.model';
 

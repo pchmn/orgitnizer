@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import 'dotenv/config';
 import fs from 'fs-extra';
 import { Client, Functions } from 'node-appwrite';
