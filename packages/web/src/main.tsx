@@ -1,5 +1,6 @@
 import App from '@app/App';
 import '@app/core/i18n';
+import '@conf/appwrite';
 import '@conf/firebase';
 import isPropValid from '@emotion/is-prop-valid';
 import { VokerUiProvider } from '@lib/ui';

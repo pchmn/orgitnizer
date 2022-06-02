@@ -1,5 +1,10 @@
+import { Dashboard } from '../components/Dashboard';
 import { DashboardLayout } from '../layout';
 
 export function DashboardPage() {
-  return <DashboardLayout>Hello from DashboardPage</DashboardLayout>;
+  return (
+    <DashboardLayout>
+      <Dashboard />
+    </DashboardLayout>
+  );
 }
