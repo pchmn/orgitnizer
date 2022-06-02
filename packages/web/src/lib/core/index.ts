@@ -1,3 +1,4 @@
+export * from './appwrite';
 export * from './firebase';
 export * from './storage';
 export * from './utils/convertObjectToDotNotation';
