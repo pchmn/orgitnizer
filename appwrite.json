@@ -1,0 +1,23 @@
+{
+  "projectId": "6286756095b7c7c3c4b5",
+  "projectName": "orgitz-local",
+  "functions": [
+    {
+      "$id": "set-github-username",
+      "name": "set-github-username",
+      "runtime": "node-16.0",
+      "path": "packages/functions/set-github-username",
+      "entrypoint": "dist/index.js",
+      "ignore": [
+        "node_modules",
+        "src",
+        "package.json",
+        "tsconfig.json"
+      ],
+      "execute": [],
+      "events": [],
+      "schedule": "",
+      "timeout": 15
+    }
+  ]
+}
