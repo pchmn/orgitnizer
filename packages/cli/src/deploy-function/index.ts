@@ -1,53 +1,50 @@
 #!/usr/bin/env node
 import { config } from 'dotenv';
 import fs from 'fs-extra';
-import { Client, Functions } from 'node-appwrite';
-import { FunctionConfig } from '../models/functionConfig.model';
+import { Functions } from 'node-appwrite';
+import { AppwriteConfig, FunctionConfig } from '../models/functionConfig.model';
+import { initSdk } from '../utils/initSdk';
 
 config({ path: `${__dirname}/../.env` });
 
 let functions: Functions;
-let functionToDeploy: FunctionConfig;
+let appwriteJson: AppwriteConfig;
 
-export async function run() {
-  try {
-    const functionName = process.argv[2];
-    functions = initSdk();
-    functionToDeploy = getFunctionToDeploy(functionName);
+export async function runDeployFunction(params: string) {
+  functions = initSdk();
+  appwriteJson = JSON.parse(fs.readFileSync(`${__dirname}/../../../appwrite.json`, 'utf8'));
 
-    await createFunctionIfNotExists();
-    await deployFunction();
-
-    console.log('\x1b[32m', `\u2705 function ${functionName} deployed`);
-  } catch (err: any) {
-    console.error('\x1b[31m', `\u26A0 ${err}`);
-  }
+  await deploy(params);
 }
 
-function initSdk() {
-  const client = new Client();
-  client
-    .setEndpoint(process.env.APPWRITE_ENDPOINT || '')
-    .setProject(process.env.APPWRITE_PROJECT_ID || '')
-    .setKey(process.env.APPWRITE_API_KEY || '');
-  return new Functions(client);
+async function deploy(params: string) {
+  if (params === 'all') {
+    appwriteJson.functions.forEach(async (item: FunctionConfig) => {
+      const functionToDeploy = getFunctionToDeploy(item.name);
+      await createFunctionIfNotExists(functionToDeploy);
+      await deployFunction(functionToDeploy);
+      console.log('\x1b[32m', `\u2705 function ${item.name} deployed`);
+    });
+  } else {
+    const functionToDeploy = getFunctionToDeploy(params);
+    await createFunctionIfNotExists(functionToDeploy);
+    await deployFunction(functionToDeploy);
+    console.log('\x1b[32m', `\u2705 function ${params} deployed`);
+  }
 }
 
 function getFunctionToDeploy(functionName: string) {
-  const appwriteJson = JSON.parse(fs.readFileSync(`${__dirname}/../../../appwrite.json`, 'utf8'));
-  const functionToDeploy: FunctionConfig = appwriteJson.functions.find(
-    (item: FunctionConfig) => item.name === functionName
-  );
+  const functionToDeploy = appwriteJson.functions.find((item: FunctionConfig) => item.name === functionName);
   if (!functionToDeploy) {
     throw new Error(`function ${functionName} not found`);
   }
-  if (!fs.existsSync(`${__dirname}/../../../${functionToDeploy.path}/${functionToDeploy.entrypoint}`)) {
-    throw new Error(`function ${functionName} entrypoint not found`);
+  if (!fs.existsSync(`${__dirname}/../../../${functionToDeploy.path}/${functionToDeploy.name}.tar.gz`)) {
+    throw new Error(`function ${functionName} build (.tar.gz) not found`);
   }
   return functionToDeploy;
 }
 
-async function createFunctionIfNotExists() {
+async function createFunctionIfNotExists(functionToDeploy: FunctionConfig) {
   try {
     await functions.get(functionToDeploy.name);
   } catch (err: any) {
@@ -68,7 +65,7 @@ async function createFunctionIfNotExists() {
   }
 }
 
-async function deployFunction() {
+async function deployFunction(functionToDeploy: FunctionConfig) {
   await functions.createDeployment(
     functionToDeploy.$id,
     functionToDeploy.entrypoint,
@@ -76,5 +73,3 @@ async function deployFunction() {
     true
   );
 }
-
-run();

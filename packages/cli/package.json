@@ -11,13 +11,10 @@
   "license": "MIT",
   "homepage": "https://github.com/pchmn/orgitz",
   "bin": {
-    "init-function": "bin/init-function.js",
-    "deploy-function": "bin/deploy-function.js"
+    "orgitz": "./bin/orgitz-cli.js"
   },
   "scripts": {
-    "build": "pnpm run build-init-function && pnpm run build-deploy-function",
-    "build-init-function": "esbuild src/init-function/index.ts --bundle --minify --platform=node --target=node16.0 --outfile=bin/init-function.js",
-    "build-deploy-function": "esbuild src/deploy-function/index.ts --bundle --minify --platform=node --target=node16.0 --outfile=bin/deploy-function.js"
+    "build": "esbuild src/index.ts --bundle --minify --platform=node --target=node16.0 --outfile=bin/orgitz-cli.js"
   },
   "dependencies": {
     "dotenv": "^16.0.1",

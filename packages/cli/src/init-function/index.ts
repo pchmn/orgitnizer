@@ -4,14 +4,9 @@ import { FunctionConfig } from '../models/functionConfig.model';
 
 const rootDirectory = `${__dirname}/../../..`;
 
-export async function run() {
-  try {
-    const functionName = process.argv[2];
-    initFunction(functionName);
-    console.log('\x1b[32m', `\u2705 function ${functionName} initialized`);
-  } catch (err: any) {
-    console.error('\x1b[31m', `\u26A0 ${err?.message}`);
-  }
+export async function runInitFunction(functionName: string) {
+  initFunction(functionName);
+  console.log('\x1b[32m', `\u2705 function ${functionName} initialized`);
 }
 
 function initFunction(functionName: string) {
@@ -64,4 +59,4 @@ function updateAppWriteJson(functionName: string) {
   fs.writeFileSync(`${__dirname}/../../../appwrite.json`, JSON.stringify(appwriteJson, null, 2));
 }
 
-run();
+// run();

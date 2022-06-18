@@ -10,3 +10,7 @@ export interface FunctionConfig {
   schedule: string;
   timeout: number;
 }
+
+export interface AppwriteConfig {
+  functions: FunctionConfig[];
+}

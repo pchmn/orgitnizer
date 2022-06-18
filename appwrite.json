@@ -1,6 +1,4 @@
 {
-  "projectId": "6286756095b7c7c3c4b5",
-  "projectName": "orgitz-local",
   "functions": [
     {
       "$id": "set-github-username",
