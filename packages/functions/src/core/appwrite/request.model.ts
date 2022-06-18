@@ -1,5 +1,5 @@
 export interface Request {
-  env: { [key: string]: string };
-  headers: { [key: string]: string };
-  payload: { [key: string]: unknown };
+  env: Record<string, string>;
+  headers: Record<string, string>;
+  payload: Record<string, unknown>;
 }

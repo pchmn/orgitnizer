@@ -4,7 +4,7 @@ import { Account } from 'node-appwrite';
 
 export default async function index(req: Request, res: Response) {
   try {
-    const { account } = initSdk();
+    const { account } = initSdk(req.env);
 
     const accountUpdated = await updateAccountName(account);
 
