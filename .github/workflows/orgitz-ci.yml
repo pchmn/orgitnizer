@@ -127,4 +127,4 @@ jobs:
         with:
           context: packages/web/
           push: true
-          tags: pchmn/orgitz-web:latest
+          tags: ghcr.io/pchmn/orgitz-web:latest
