@@ -20,7 +20,7 @@ jobs:
 
   # Build & Test Web
   buildAndTestWeb:
-    name: [WEB] Build & Test
+    name: (WEB) Build & Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -64,7 +64,7 @@ jobs:
 
   # Build & Test Functions
   buildAndTestFunctions:
-    name: [FUNCTIONS] Build & Test
+    name: (FUNCTIONS) Build & Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -100,7 +100,7 @@ jobs:
 
   # Publish web container
   publishWebDockerImage:
-    name: [WEB] Publish Docker Image
+    name: (WEB) Publish Docker Image
     needs: buildAndTestWeb
     runs-on: ubuntu-latest
     steps:
