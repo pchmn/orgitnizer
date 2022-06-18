@@ -9,12 +9,10 @@
       "path": "packages/functions/dist",
       "entrypoint": "set-github-username.js",
       "ignore": [
-        "node_modules",
-        "src",
-        "package.json",
-        "tsconfig.json"
       ],
-      "execute": [],
+      "execute": [
+        "role:member"
+      ],
       "events": [],
       "schedule": "",
       "timeout": 15
