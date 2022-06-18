@@ -20,6 +20,9 @@ env:
   GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
   VITE_APPWRITE_ENDPOINT: ${{ secrets.VITE_APPWRITE_ENDPOINT }}
   VITE_APPWRITE_PROJECT_ID: ${{ secrets.VITE_APPWRITE_PROJECT_ID }}
+  APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+  APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+  APPWRITE_API_KEY: ${{ secrets.APPWRITE_API_KEY }}
 
 jobs:
 
@@ -181,4 +184,7 @@ jobs:
 
       # Deploy functions
       - name: Deploy functions
-        run: pnpm build:cli && pnpm link @orgitz/cli && pnpm orgitz deploy function all
+        run: |
+          pnpm build:cli
+          pnpm link @orgitz/cli
+          pnpm orgitz function deploy all
