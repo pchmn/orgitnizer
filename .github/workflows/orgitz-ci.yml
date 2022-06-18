@@ -1,4 +1,4 @@
-name: App CI
+name: Orgitz CI
 
 on:
   push:
@@ -120,6 +120,6 @@ jobs:
         with:
           registry: ghcr.io
           username: "pchmn"
-          password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          password: ${{ env.GITHBU_TOKEN }}
           repository: pchmn/orgitz-web
           tags: latest
