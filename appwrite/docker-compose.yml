@@ -47,7 +47,7 @@ services:
       - appwrite
 
   orgitz-web:
-    build: ../packages/web
+    image: ghcr.io/pchmn/orgitz-web
     labels:
       - traefik.enable=true
       - traefik.constraint-label-stack=appwrite
