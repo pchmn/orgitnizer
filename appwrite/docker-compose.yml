@@ -54,32 +54,16 @@ services:
       - traefik.docker.network=appwrite
       - traefik.http.services.orgitz_web.loadbalancer.server.port=3000
       # htpp
-      - traefik.http.routers.orgitz_web_http.rule=Host(`orgitz_web.localhost`)
+      - traefik.http.routers.orgitz_web_http.rule=Host(`${WEB_APP_HOST}`)
       - traefik.http.routers.orgitz_web_http.entrypoints=appwrite_web
       - traefik.http.routers.orgitz_web_http.service=orgitz_web
       # https
-      - traefik.http.routers.orgitz_web_https.rule=Host(`orgitz_web.localhost`)
+      - traefik.http.routers.orgitz_web_https.rule=Host(`${WEB_APP_HOST}`)
       - traefik.http.routers.orgitz_web_https.entrypoints=appwrite_websecure
       - traefik.http.routers.orgitz_web_https.service=orgitz_web
       - traefik.http.routers.orgitz_web_https.tls=true
     networks:
       - appwrite
-
-  appwrite-hello-world:
-    build: ../packages/hello-world
-    restart: unless-stopped
-    labels:
-      - traefik.enable=true
-      - traefik.constraint-label-stack=appwrite
-      - traefik.docker.network=appwrite
-      - traefik.http.services.appwrite-hello-world.loadbalancer.server.port=3030
-      #http
-      - traefik.http.routers.appwrite-hello-world-http.rule=Host(`helloworld.localhost`)
-      - traefik.http.routers.appwrite-hello-world-http.entrypoints=appwrite_web
-      # - traefik.http.routers.appwrite-hello-world-http.rule=PathPrefix(`/helloWorld`)
-      - traefik.http.routers.appwrite-hello-world-http.service=appwrite-hello-world
-    networks:
-        - appwrite
 
   appwrite:
     image: appwrite/appwrite:0.14.2
