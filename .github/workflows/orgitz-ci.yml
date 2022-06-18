@@ -152,15 +152,30 @@ jobs:
             sudo docker-compose pull orgitz-web
             sudo docker-compose up -d --remove-orphans --renew-anon-volumes
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # pnpm cache
+      - uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      # Install
+      - name: Install
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.32.3
+          run_install: true
+
       # Download dist function artifacts
       - uses: actions/download-artifact@v2
         with:
           name: dist-functions
           path: packages/functions/dist/
-
-      - uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 6.32.3
 
       # Deploy functions
       - name: Deploy functions
