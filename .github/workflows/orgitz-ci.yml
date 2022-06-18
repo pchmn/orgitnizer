@@ -134,6 +134,8 @@ jobs:
     name: Deploy
     needs: [buildAndTestFunctions, publishWebDockerImage]
     runs-on: ubuntu-latest
+    environment:
+      name: orgitz.deploy
     steps:
       - uses: actions/checkout@v3
 
@@ -147,8 +149,8 @@ jobs:
           script: |
             echo $GITHUB_TOKEN | docker login ghcr.io -u pchmn --password-stdin
             cd appwrite
-            docker-compose pull orgitz-web
-            docker-compose up -d --remove-orphans --renew-anon-volumes
+            sudo docker-compose pull orgitz-web
+            sudo docker-compose up -d --remove-orphans --renew-anon-volumes
 
       # Download dist function artifacts
       - uses: actions/download-artifact@v2
