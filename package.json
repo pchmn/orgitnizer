@@ -16,9 +16,10 @@
     "serve:web": "pnpm --filter @orgitz/web run serve",
     "test:web": "pnpm --filter @orgitz/web run test:int",
     "build:functions": "pnpm --filter @orgitz/functions run build",
+    "build:cli": "pnpm --filter @orgitz/cli run build",
     "prepare": "husky install && rm -rf .git/hooks && ln -s ../.husky .git/hooks",
-    "build-docker": "cd appwrite && docker-compose up --build orgitz-web",
-    "start-docker": "cd appwrite && docker-compose up -d --remove-orphans --renew-anon-volumes",
+    "build-docker": "cd appwrite && docker-compose pull orgitz-web && docker-compose up",
+    "start-docker": "cd appwrite && docker-compose pull orgitz-web && docker-compose up -d --remove-orphans --renew-anon-volumes",
     "stop-docker": "cd appwrite && docker-compose stop",
     "rm-docker": "cd appwrite && docker-compose rm",
     "lint": "eslint --cache --fix ."

@@ -156,9 +156,10 @@ jobs:
           name: dist-functions
           path: packages/functions/dist/
 
-      # Deploy functions
-      - name: Deploy functions
-        uses: pnpm/action-setup@v2.2.2
+      - uses: pnpm/action-setup@v2.2.2
         with:
           version: 6.32.3
-        run: pnpm orgitz deploy function all
+
+      # Deploy functions
+      - name: Deploy functions
+        run: pnpm build:cli && pnpm link @orgitz/cli && pnpm orgitz deploy function all
