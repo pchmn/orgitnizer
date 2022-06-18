@@ -26,7 +26,7 @@ jobs:
     name: (WEB) Build & Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # - name: Get Web changed files
       #   id: changed-files-web
@@ -36,7 +36,7 @@ jobs:
       #       !*.md
       #       packages/web/**
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: "16"
 
@@ -50,7 +50,7 @@ jobs:
 
       # Install
       - name: Install
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v2.2.2
         with:
           version: 6.32.3
           run_install: true
@@ -70,9 +70,9 @@ jobs:
     name: (FUNCTIONS) Build & Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: "16"
 
@@ -86,7 +86,7 @@ jobs:
 
       # Install
       - name: Install
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v2.2.2
         with:
           version: 6.32.3
           run_install: true
@@ -107,7 +107,7 @@ jobs:
     needs: buildAndTestWeb
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # Download dist artifacts
       - uses: actions/download-artifact@v2
@@ -128,3 +128,37 @@ jobs:
           context: packages/web/
           push: true
           tags: ghcr.io/pchmn/orgitz-web:latest
+
+  # Deploy App
+  deploy:
+    name: Deploy
+    needs: [buildAndTestFunctions, publishWebDockerImage]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: App docker-compose up
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          envs: GITHUB_TOKEN
+          script: |
+            echo $GITHUB_TOKEN | docker login ghcr.io -u pchmn --password-stdin
+            cd appwrite
+            docker-compose pull orgitz-web
+            docker-compose up -d --remove-orphans --renew-anon-volumes
+
+      # Download dist function artifacts
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist-functions
+          path: packages/functions/dist/
+
+      # Deploy functions
+      - name: Deploy functions
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.32.3
+        run: pnpm orgitz deploy function all
