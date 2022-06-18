@@ -62,7 +62,7 @@ jobs:
       # Upload dist artifacts
       - uses: actions/upload-artifact@v2
         with:
-          name: web-dist
+          name: dist-web
           path: packages/web/dist/
 
   # Build & Test Functions
@@ -98,7 +98,7 @@ jobs:
       # Upload dist artifacts
       - uses: actions/upload-artifact@v2
         with:
-          name: functions-dist
+          name: dist-functions
           path: packages/functions/dist/
 
   # Publish web container
