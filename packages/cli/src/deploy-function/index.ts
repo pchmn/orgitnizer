@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-import 'dotenv/config';
+import { config } from 'dotenv';
 import fs from 'fs-extra';
 import { Client, Functions } from 'node-appwrite';
 import { FunctionConfig } from '../models/functionConfig.model';
+
+config({ path: `${__dirname}/../.env` });
 
 let functions: Functions;
 let functionToDeploy: FunctionConfig;
@@ -18,7 +20,7 @@ export async function run() {
 
     console.log('\x1b[32m', `\u2705 function ${functionName} deployed`);
   } catch (err: any) {
-    console.error('\x1b[31m', `\u26A0 ${err?.message}`);
+    console.error('\x1b[31m', `\u26A0 ${err}`);
   }
 }
 
@@ -49,6 +51,7 @@ async function createFunctionIfNotExists() {
   try {
     await functions.get(functionToDeploy.name);
   } catch (err: any) {
+    // console.log(err);
     if (err.code === 404) {
       await functions.create(
         functionToDeploy.$id,
@@ -68,7 +71,7 @@ async function createFunctionIfNotExists() {
 async function deployFunction() {
   await functions.createDeployment(
     functionToDeploy.$id,
-    `dist/${functionToDeploy.entrypoint}`,
+    functionToDeploy.entrypoint,
     `${__dirname}/../../../${functionToDeploy.path}/${functionToDeploy.name}.tar.gz`,
     true
   );

@@ -11,7 +11,8 @@
   "license": "MIT",
   "homepage": "https://github.com/pchmn/orgitz",
   "bin": {
-    "init-function": "bin/init-function.js"
+    "init-function": "bin/init-function.js",
+    "deploy-function": "bin/deploy-function.js"
   },
   "scripts": {
     "build": "pnpm run build-init-function && pnpm run build-deploy-function",
