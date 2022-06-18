@@ -6,6 +6,6 @@ describe('SignIn', () => {
   it('should render correctly', () => {
     renderWithProvider(<SignIn />);
 
-    expect(screen.getByText('signIn.signInWithGitHub')).toBeInTheDocument();
+    expect(screen.getByText('signIn.signInWithGitHub')).toBeDefined();
   });
 });

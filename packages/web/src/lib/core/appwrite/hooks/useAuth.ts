@@ -30,8 +30,8 @@ export function useAuth() {
   const signIn = () =>
     appwrite.account.createOAuth2Session(
       'github',
-      'http://localhost:3000/orgitz/signin?redirectResult=success',
-      'http://localhost:3000/orgitz/signin?redirectResult=failure',
+      'http://localhost:3000/signin?redirectResult=success',
+      'http://localhost:3000/signin?redirectResult=failure',
       ['read:user']
     );
 

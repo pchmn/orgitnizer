@@ -21,7 +21,6 @@ function App() {
 
   return (
     <Router
-      basepath="/orgitz"
       location={location}
       key={location.current.pathname}
       routes={[dashboardRoutes, signInRoutes, { element: <Navigate to="/dashboard" /> }]}
