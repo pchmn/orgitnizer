@@ -21,7 +21,7 @@ function Footer({ theme }: { theme: MantineTheme }) {
       justifyContent="center"
       padding={20}
       style={{
-        borderTop: `1px solid ${theme.other.schemes[theme.colorScheme].surface4}`
+        borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]}`
       }}
     >
       <Text size="sm">Orgitz · Made by pchmn ·</Text>

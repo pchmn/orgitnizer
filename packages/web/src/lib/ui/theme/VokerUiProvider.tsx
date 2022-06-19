@@ -10,7 +10,7 @@ import {
 import { useColorScheme, useLocalStorage } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
 import { createContext, PropsWithChildren, useContext } from 'react';
-import { schemes, themeColors } from './colors';
+import { themeColors } from './colors';
 import { themeStyles } from './theme';
 
 type ThemeSettingsContext = {
@@ -40,9 +40,7 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
         theme={{
           colorScheme,
           colors: themeColors,
-          primaryColor: 'primary',
-          primaryShade: { light: 6, dark: 2 },
-          other: schemes,
+          primaryColor: 'violet',
           fontFamily: '"Readex Pro", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
           headings: {
             fontFamily: '"Readex Pro", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
@@ -50,15 +48,13 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
           defaultRadius: 'md'
         }}
         styles={themeStyles}
-        // defaultProps={defaultProps}
       >
         <NotificationsProvider>
           <Global
             styles={(theme) => ({
               body: {
                 ...theme.fn.fontStyles(),
-                backgroundColor: theme.other.schemes[theme.colorScheme].background,
-                color: theme.other.schemes[theme.colorScheme].onBackground,
+                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
                 WebkitFontSmoothing: 'antialiased'
               }
             })}

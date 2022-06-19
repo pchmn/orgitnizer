@@ -1,48 +1,25 @@
-import { ButtonStylesParams, CSSObject, MantineTheme } from '@mantine/core';
-import { CustomColors, Scheme } from './mantine';
-
-export const defaultProps: Record<string, Record<string, unknown>> = {
-  Button: {
-    radius: 'xl'
-  }
-};
+import { CSSObject, MantineTheme } from '@mantine/core';
 
 export const themeStyles: Record<
   string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Record<string, CSSObject> | ((theme: MantineTheme, params: any) => Record<string, CSSObject>)
 > = {
-  Button: (theme, params: ButtonStylesParams) => ({
+  Button: () => ({
     filled: {
-      color: getOnColor(params.color as CustomColors, theme),
+      color: '#000',
+      boxShadow:
+        'rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px',
       '&:hover': {
-        backgroundColor: theme.fn.darken(getColor(params.color as CustomColors, theme), 0.15)
-      }
-    },
-    outline: {
-      color: getColor(params.color as CustomColors, theme),
-      borderColor: theme.other.schemes[theme.colorScheme].outline
-    },
-    loading: {
-      cursor: 'not-allowed',
-      '& svg': {
-        stroke: getOnColor(params.color as CustomColors, theme)
-      }
-    }
-  }),
-  ActionIcon: (theme) => ({
-    hover: {
-      '&:hover': {
-        backgroundColor: theme.fn.rgba('#000', theme.colorScheme === 'dark' ? 0.25 : 0.05)
+        boxShadow:
+          'rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px'
+      },
+      '&.mantine-Button-loading': {
+        cursor: 'not-allowed',
+        '& svg': {
+          stroke: '#000'
+        }
       }
     }
   })
 };
-
-function getColor(color: CustomColors = 'primary', theme: MantineTheme): string {
-  return theme.other.schemes[theme.colorScheme][color];
-}
-
-function getOnColor(color: CustomColors = 'primary', theme: MantineTheme): string {
-  return theme.other.schemes[theme.colorScheme][`on${color.charAt(0).toUpperCase()}${color.slice(1)}` as keyof Scheme];
-}
