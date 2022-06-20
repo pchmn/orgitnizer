@@ -52,8 +52,8 @@ export function SignIn() {
   };
 
   return (
-    <FlexLayout alignItems="center" flexGrow={1} spacing={40} style={{ marginTop: '5%' }}>
-      <Title style={{ marginBottom: 0 }} align="center">
+    <FlexLayout alignItems="center" flexGrow={1} spacing={40} style={{ margin: '150px 0' }}>
+      <Title style={{ margin: 0 }} align="center">
         {t('signIn.title')}
       </Title>
       <Text align="center" style={{ maxWidth: 500 }}>
