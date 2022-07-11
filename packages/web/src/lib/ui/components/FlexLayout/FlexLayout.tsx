@@ -1,5 +1,5 @@
 import { MantineNumberSize } from '@mantine/core';
-import { styled } from 'goober';
+import styled from 'styled-components';
 
 type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';

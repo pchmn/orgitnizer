@@ -1,7 +1,7 @@
 import { MantineTheme } from '@mantine/core';
-import 'goober';
+import 'styled-components';
 
-declare module 'goober' {
+declare module 'styled-components' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface DefaultTheme extends MantineTheme {}
 }

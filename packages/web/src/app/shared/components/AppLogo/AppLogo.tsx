@@ -1,7 +1,7 @@
 import { FlexLayout } from '@lib/ui';
-import { keyframes, MantineNumberSize, Title } from '@mantine/core';
-import { styled } from 'goober';
-import { DynamicLogo } from '..';
+import { MantineNumberSize, Title } from '@mantine/core';
+import styled, { keyframes } from 'styled-components';
+import { DynamicLogo } from './DynamicLogo';
 
 const scale = keyframes({
   '0%': {

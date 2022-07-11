@@ -5,11 +5,13 @@ import {
   MantineColor,
   MantineProvider,
   MantineThemeOverride,
-  TypographyStylesProvider
+  TypographyStylesProvider,
+  useMantineTheme
 } from '@mantine/core';
 import { useColorScheme, useLocalStorage } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
 import { createContext, PropsWithChildren, useContext } from 'react';
+import { ThemeProvider } from 'styled-components';
 import { themeColors } from './colors';
 import { themeStyles } from './theme';
 
@@ -30,6 +32,7 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
     defaultValue: preferredColorScheme,
     getInitialValueInEffect: true
   });
+  const theme = useMantineTheme();
 
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
@@ -54,12 +57,14 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
             styles={(theme) => ({
               body: {
                 ...theme.fn.fontStyles(),
-                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
                 WebkitFontSmoothing: 'antialiased'
               }
             })}
           />
-          <TypographyStylesProvider>{children}</TypographyStylesProvider>
+          <TypographyStylesProvider>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </TypographyStylesProvider>
         </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>

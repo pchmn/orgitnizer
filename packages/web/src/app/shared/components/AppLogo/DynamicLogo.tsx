@@ -1,6 +1,6 @@
 import { MantineNumberSize, useMantineTheme } from '@mantine/core';
-import { styled } from 'goober';
 import * as React from 'react';
+import styled from 'styled-components';
 
 const sizes = {
   xs: 38,
