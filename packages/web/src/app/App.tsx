@@ -1,10 +1,10 @@
+import { useIsAuthenticated } from '@app/core/auth';
 import dashboardRoutes from '@app/modules/dashboard';
 import signInRoutes from '@app/modules/signIn';
 import { useAuth } from '@lib/core';
 import { Navigate, ReactLocation, Router } from '@tanstack/react-location';
 import { useEffect } from 'react';
 import './App.css';
-import { useIsAuthenticated } from './core/auth';
 
 const location = new ReactLocation();
 
@@ -13,7 +13,6 @@ function App() {
   const [, setIsAuthenticated] = useIsAuthenticated();
 
   useEffect(() => {
-    console.log('useEffect currentUser', currentUser);
     if (currentUser !== undefined) {
       setIsAuthenticated(currentUser !== null);
     }
