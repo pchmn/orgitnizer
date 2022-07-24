@@ -1,50 +1,38 @@
 import { GithubIcon } from '@app/shared/components';
-import { SignInGenerics, useAuth } from '@lib/core';
-import { FlexLayout, Icon } from '@lib/ui';
+import { SignInGenerics, useAuth, useEffectOnce } from '@lib/core';
+import { FlexLayout, Icon, useNotification } from '@lib/ui';
 import { Button, Text, Title } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
 import { useNavigate, useSearch } from '@tanstack/react-location';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export function SignIn() {
+export const SignIn = () => {
   const { t } = useTranslation();
   const { signIn, handleSignin } = useAuth();
   const { redirectResult } = useSearch<SignInGenerics>();
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { showError } = useNotification();
+  const [isLoading, setIsLoading] = useState(!!redirectResult);
 
-  useEffect(() => {
-    const handleRedirectResult = async () => {
-      try {
-        if (!redirectResult) {
-          return;
-        }
-        setIsLoading(true);
-        await handleSignin(redirectResult);
-        if (redirectResult === 'success') {
-          navigate({ to: '/dashboard' });
-        } else if (redirectResult === 'failure') {
-          showNotification({
-            title: t('signIn.notificationError.title'),
-            message: t('signIn.notificationError.message'),
-            color: 'error',
-            autoClose: 5000
-          });
-        }
-      } catch (err) {
-        showNotification({
-          title: t('signIn.notificationError.title'),
-          message: t('signIn.notificationError.message'),
-          color: 'error',
-          autoClose: 5000
-        });
+  const handleRedirectResult = async () => {
+    try {
+      if (!redirectResult) {
+        return;
       }
-      setIsLoading(false);
-    };
+      await handleSignin(redirectResult);
+      if (redirectResult === 'success') {
+        navigate({ to: '/dashboard' });
+      } else if (redirectResult === 'failure') {
+        showError({ title: t('signIn.notificationError.title'), message: t('signIn.notificationError.message') });
+      }
+    } catch (err) {
+      showError({ title: t('signIn.notificationError.title'), message: t('signIn.notificationError.message') });
+    }
+  };
 
+  useEffectOnce(() => {
     handleRedirectResult();
-  }, [redirectResult, handleSignin, navigate, t]);
+  });
 
   const githubSignIn = () => {
     setIsLoading(true);
@@ -73,4 +61,6 @@ export function SignIn() {
       </Button>
     </FlexLayout>
   );
-}
+};
+
+SignIn.whyDidYouRender = true;

@@ -27,20 +27,22 @@ export function useAuth() {
     { staleTime: Infinity }
   );
 
-  const signIn = () =>
-    appwrite.account.createOAuth2Session(
-      'github',
-      `${import.meta.env.PROD ? 'https://orgitz.app' : 'http://localhost:3000'}/signin?redirectResult=success`,
-      `${import.meta.env.PROD ? 'https://orgitz.app' : 'http://localhost:3000'}/signin?redirectResult=failure`,
-      ['read:user']
-    );
+  const signIn = useCallback(
+    () =>
+      appwrite.account.createOAuth2Session(
+        'github',
+        `${import.meta.env.PROD ? 'https://orgitz.app' : 'http://localhost:3000'}/signin?redirectResult=success`,
+        `${import.meta.env.PROD ? 'https://orgitz.app' : 'http://localhost:3000'}/signin?redirectResult=failure`,
+        ['read:user']
+      ),
+    []
+  );
 
   const handleSignin = useCallback(
     async (redirectResult: 'success' | 'failure') => {
       if (redirectResult === 'success') {
         const account = await appwrite.account.get();
         queryClient.setQueryData('auth/user', account);
-        await callFunction<Models.User<Models.Preferences>>('set-github-username');
         if (!account.name) {
           queryClient.setQueryData(
             'auth/user',
