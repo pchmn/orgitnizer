@@ -2,17 +2,12 @@ import { initSdk, Request, Response } from '@core/appwrite';
 import { initGithubGraphql } from '@core/github';
 import { Account } from 'node-appwrite';
 
-export default async function index(req: Request, res: Response) {
-  try {
-    const { account } = initSdk(req.env);
+export default async function setGithubUsername(req: Request, res: Response) {
+  const { account } = initSdk(req.env);
 
-    const accountUpdated = await updateAccountName(account);
+  const accountUpdated = await updateAccountName(account);
 
-    res.json(accountUpdated);
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
+  res.json(accountUpdated);
 }
 
 async function updateAccountName(account: Account) {
