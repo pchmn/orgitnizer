@@ -14,13 +14,15 @@
     "build": "pnpm build-set-github-username",
     "build-set-github-username": "esbuild src/set-github-username/index.ts --bundle --minify --platform=node --target=node16.0 --outfile=dist/set-github-username.js && tar -czvf dist/set-github-username.tar.gz --directory=dist set-github-username.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:ci": "vitest run --coverage"
   },
   "dependencies": {
     "@octokit/graphql": "^4.8.0",
     "node-appwrite": "^5.0.0"
   },
   "devDependencies": {
+    "c8": "^7.12.0",
     "esbuild": "^0.14.42",
     "typescript": "^4.7.4",
     "vite-tsconfig-paths": "^3.3.17",

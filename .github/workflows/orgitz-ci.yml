@@ -64,6 +64,10 @@ jobs:
       - name: Build
         run: pnpm build:web
 
+      # Test
+      - name: Test
+        run: pnpm test:web:ci
+
       # Upload dist artifacts
       - uses: actions/upload-artifact@v2
         with:
@@ -99,6 +103,10 @@ jobs:
       # Build
       - name: Build
         run: pnpm build:functions
+
+      # Test
+      - name: Test
+        run: pnpm test:functions:ci
 
       # Upload dist artifacts
       - uses: actions/upload-artifact@v2
