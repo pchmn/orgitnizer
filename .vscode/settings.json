@@ -5,4 +5,6 @@
     "source.organizeImports": true
   },
   "typescript.preferences.importModuleSpecifier": "shortest",
+  // "vitest.enable": true,
+  "vitest.commandLine": "pnpm test:web:watch"
 }

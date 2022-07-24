@@ -14,8 +14,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:ci": "tsc && vite build && cp 404.html dist/",
-    "test": "vitest",
-    "test:int": "firebase emulators:exec --project test-project 'pnpm vitest'",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
     "test:ci": "vitest run --coverage",
     "serve": "vite preview",
     "lint": "eslint --cache --fix ./src"
@@ -46,10 +47,12 @@
     "@types/styled-components": "^5.1.25",
     "@types/testing-library__jest-dom": "^5.14.3",
     "@vitejs/plugin-react": "^1.3.0",
-    "jsdom": "^19.0.0",
+    "@vitest/ui": "^0.19.0",
+    "@welldone-software/why-did-you-render": "^7.0.1",
+    "happy-dom": "^6.0.3",
     "typescript": "^4.7.4",
-    "vite": "^2.9.2",
+    "vite": "^3.0.0",
     "vite-tsconfig-paths": "^3.3.17",
-    "vitest": "^0.17.0"
+    "vitest": "^0.18.1"
   }
 }
