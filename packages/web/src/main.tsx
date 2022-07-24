@@ -1,3 +1,5 @@
+import './wdyr';
+
 import App from '@app/App';
 import '@app/core/i18n';
 import '@conf/appwrite';

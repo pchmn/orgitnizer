@@ -7,7 +7,7 @@ const credentials = import.meta.env.PROD
     }
   : {
       endpoint: 'http://localhost/v1',
-      projectId: '6286756095b7c7c3c4b5'
+      projectId: '62a0dbda79170deb5814'
     };
 
 initSdk(credentials);
