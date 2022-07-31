@@ -1,5 +1,5 @@
 import { AppLogo, MenuIcon } from '@app/shared/components';
-import { FlexLayout, ToggleColorScheme } from '@lib/ui';
+import { Stack, ToggleColorScheme } from '@lib/ui';
 import { ActionIcon, Drawer as MantineDrawer, Header as MantineHeader, useMantineTheme } from '@mantine/core';
 import { DrawerContent } from './DrawerContent';
 import { DrawerProvider, useDrawer } from './DrawerContext';
@@ -37,15 +37,15 @@ function Header() {
         fontSize: '18px'
       }}
     >
-      <FlexLayout direction="row" alignItems="center" fullHeight spacing="md">
+      <Stack direction="row" alignItems="center" fullHeight spacing="md">
         <ActionIcon size="lg" onClick={toggle}>
           <MenuIcon size="lg" />
         </ActionIcon>
-        <FlexLayout direction="row" justifyContent="space-between" fullHeight alignItems="center" flexGrow={1}>
+        <Stack direction="row" justifyContent="space-between" fullHeight alignItems="center" flexGrow={1}>
           <AppLogo direction="row" size="xs" />
           <ToggleColorScheme />
-        </FlexLayout>
-      </FlexLayout>
+        </Stack>
+      </Stack>
     </MantineHeader>
   );
 }

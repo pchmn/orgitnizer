@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import { MantineNumberSize } from '@mantine/core';
-import styled from 'styled-components';
 
 type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
@@ -11,7 +11,7 @@ type FlexCommon = 'flex-start' | 'flex-end' | 'start' | 'end';
 type MixProperties<A extends string, B extends string> = `${A} ${B}`;
 type AlignItems = FlexCommon | 'stretch' | 'self-start' | 'self-end' | 'center' | 'baseline';
 
-export interface FlexLayoutProps {
+export interface StackProps {
   direction?: FlexDirection | Globals;
   flexWrap?: FlexWrap | Globals;
   flexFlow?: MixProperties<FlexDirection, FlexWrap> | Globals;
@@ -29,7 +29,7 @@ export interface FlexLayoutProps {
   flexGrow?: number;
 }
 
-export const FlexLayout = styled('div')<FlexLayoutProps>(
+export const Stack = styled('div')<StackProps>(
   ({
     direction: flexDirection = 'column',
     flexWrap,
