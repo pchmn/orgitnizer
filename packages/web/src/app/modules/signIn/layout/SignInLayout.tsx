@@ -1,5 +1,5 @@
 import { AppLogo, GithubIcon } from '@app/shared/components';
-import { FlexLayout, ToggleColorScheme } from '@lib/ui';
+import { Stack, ToggleColorScheme } from '@lib/ui';
 import { ActionIcon, Header as MantineHeader, MantineTheme, Space, Text, useMantineTheme } from '@mantine/core';
 import { PropsWithChildren } from 'react';
 
@@ -7,9 +7,9 @@ export function SignInLayout({ children }: PropsWithChildren<unknown>) {
   const theme = useMantineTheme();
 
   return (
-    <FlexLayout style={{ minHeight: '100vh' }} spacing={0}>
+    <Stack style={{ minHeight: '100vh' }} spacing={0}>
       <Header theme={theme} />
-      <FlexLayout style={{ height: 'calc(100vh - 70px)', overflow: 'auto' }} spacing={0}>
+      <Stack style={{ height: 'calc(100vh - 70px)', overflow: 'auto' }} spacing={0}>
         <div
           style={{
             flexGrow: 1,
@@ -20,8 +20,8 @@ export function SignInLayout({ children }: PropsWithChildren<unknown>) {
           {children}
         </div>
         <Footer theme={theme} />
-      </FlexLayout>
-    </FlexLayout>
+      </Stack>
+    </Stack>
   );
 }
 
@@ -35,19 +35,19 @@ function Header({ theme }: { theme: MantineTheme }) {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0]
       }}
     >
-      <FlexLayout direction="row" alignItems="center" fullHeight growChildren>
-        <FlexLayout direction="row" justifyContent="space-between" fullHeight alignItems="center">
+      <Stack direction="row" alignItems="center" fullHeight growChildren>
+        <Stack direction="row" justifyContent="space-between" fullHeight alignItems="center">
           <AppLogo direction="row" size="sm" />
           <ToggleColorScheme />
-        </FlexLayout>
-      </FlexLayout>
+        </Stack>
+      </Stack>
     </MantineHeader>
   );
 }
 
 function Footer({ theme }: { theme: MantineTheme }) {
   return (
-    <FlexLayout
+    <Stack
       direction="row"
       justifyContent="center"
       padding={20}
@@ -60,6 +60,6 @@ function Footer({ theme }: { theme: MantineTheme }) {
       <ActionIcon size="sm">
         <GithubIcon />
       </ActionIcon>
-    </FlexLayout>
+    </Stack>
   );
 }

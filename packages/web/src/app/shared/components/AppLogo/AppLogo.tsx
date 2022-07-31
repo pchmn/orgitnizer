@@ -1,6 +1,7 @@
-import { FlexLayout } from '@lib/ui';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
+import { Stack } from '@lib/ui';
 import { MantineNumberSize, Title } from '@mantine/core';
-import styled, { keyframes } from 'styled-components';
 import { DynamicLogo } from './DynamicLogo';
 
 // const sizes = {
@@ -71,7 +72,7 @@ interface AppLogoProps {
 
 export function AppLogo({ direction = 'column', size = 'sm', animate = false, onAnimationEnd, onClick }: AppLogoProps) {
   return (
-    <FlexLayout direction={direction} alignItems="center" spacing={size} onClick={onClick}>
+    <Stack direction={direction} alignItems="center" spacing={size} onClick={onClick}>
       <Logo animate={+animate} size={size} />
       <AppName
         animate={+animate}
@@ -81,6 +82,6 @@ export function AppLogo({ direction = 'column', size = 'sm', animate = false, on
       >
         Orgitz
       </AppName>
-    </FlexLayout>
+    </Stack>
   );
 }

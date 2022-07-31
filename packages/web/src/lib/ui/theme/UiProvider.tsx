@@ -1,9 +1,11 @@
+import { ThemeProvider } from '@emotion/react';
 import {
   ColorScheme,
   ColorSchemeProvider,
   Global,
   MantineColor,
   MantineProvider,
+  MantineTheme,
   MantineThemeOverride,
   TypographyStylesProvider,
   useMantineTheme
@@ -11,9 +13,8 @@ import {
 import { useColorScheme, useLocalStorage } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
 import { createContext, PropsWithChildren, useContext } from 'react';
-import { ThemeProvider } from 'styled-components';
 import { themeColors } from './colors';
-import { themeStyles } from './theme';
+import { componentsTheme } from './theme';
 
 type ThemeSettingsContext = {
   themeSettings: MantineThemeOverride | undefined;
@@ -25,7 +26,7 @@ export const ThemeSettingsContext = createContext({} as ThemeSettingsContext);
 
 export const useThemeSettings = () => useContext(ThemeSettingsContext);
 
-export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
+export function UiProvider({ children }: PropsWithChildren<unknown>) {
   const preferredColorScheme = useColorScheme();
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
@@ -51,13 +52,15 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
           defaultRadius: 'md',
           breakpoints: {
             sm: 755
-          }
+          },
+          components: componentsTheme
         }}
-        styles={themeStyles}
+        withGlobalStyles
+        withNormalizeCSS
       >
         <NotificationsProvider>
           <Global
-            styles={(theme) => ({
+            styles={(theme: MantineTheme) => ({
               body: {
                 ...theme.fn.fontStyles(),
                 backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],

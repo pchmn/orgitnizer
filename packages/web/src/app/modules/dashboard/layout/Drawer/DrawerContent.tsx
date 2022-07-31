@@ -1,5 +1,5 @@
 import { AppLogo, RepositoryIcon, StarIcon } from '@app/shared/components';
-import { FlexLayout } from '@lib/ui';
+import { Stack } from '@lib/ui';
 import { Navbar } from '@mantine/core';
 import { DrawerItem } from './DrawerItem';
 
@@ -14,15 +14,15 @@ export function DrawerContent({ showAppLogo = true }: { showAppLogo?: boolean })
       })}
     >
       <Navbar.Section mb={50}>
-        <FlexLayout direction="row" justifyContent="space-between" alignItems="center">
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
           <AppLogo direction="row" size={showAppLogo ? 'sm' : 'xs'} />
-        </FlexLayout>
+        </Stack>
       </Navbar.Section>
       <Navbar.Section grow>
-        <FlexLayout spacing="xs">
+        <Stack spacing="xs">
           <DrawerItem to="/dashboard/stars" icon={<StarIcon size={22} />} label="My Stars" />
           <DrawerItem to="/dashboard/repositories" icon={<RepositoryIcon size={22} />} label="My Repositories" />
-        </FlexLayout>
+        </Stack>
       </Navbar.Section>
       <Navbar.Section>{/* Footer with user */}</Navbar.Section>
     </Navbar>

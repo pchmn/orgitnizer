@@ -1,4 +1,4 @@
-import { FlexLayout } from '@lib/ui';
+import { Stack } from '@lib/ui';
 import * as React from 'react';
 import { PropsWithChildren } from 'react';
 
@@ -10,10 +10,10 @@ interface AppLayoutProps {
 export function AppLayout({ header, footer, children }: PropsWithChildren<AppLayoutProps>) {
   return (
     <>
-      <FlexLayout style={{ minHeight: '100vh' }} spacing={0}>
+      <Stack style={{ minHeight: '100vh' }} spacing={0}>
         {header}
         {/* <ScrollArea style={{ height: 'calc(100vh - 70px)' }}> */}
-        <FlexLayout style={{ height: 'calc(100vh - 70px)', overflow: 'auto' }} spacing={0}>
+        <Stack style={{ height: 'calc(100vh - 70px)', overflow: 'auto' }} spacing={0}>
           <div
             style={{
               flexGrow: 1,
@@ -24,9 +24,9 @@ export function AppLayout({ header, footer, children }: PropsWithChildren<AppLay
             {children}
           </div>
           {footer}
-        </FlexLayout>
+        </Stack>
         {/* </ScrollArea> */}
-      </FlexLayout>
+      </Stack>
     </>
   );
 }

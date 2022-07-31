@@ -1,6 +1,6 @@
 import { LanguageIcon, SearchIcon } from '@app/shared/components';
 import { useEffectOnce } from '@lib/core';
-import { FlexLayout, Icon } from '@lib/ui';
+import { Icon, Stack } from '@lib/ui';
 import { MultiSelect, TextInput } from '@mantine/core';
 
 interface RepoListProps {
@@ -13,28 +13,21 @@ export function Repositories({ type }: RepoListProps) {
   });
 
   return (
-    <FlexLayout>
-      <TextInput
-        icon={<SearchIcon size="sm" />}
-        placeholder="Search your stars"
-        variant="default"
-        style={{ width: 250 }}
-      />
-      <FlexLayout direction="column">
+    <Stack>
+      <TextInput icon={<SearchIcon size="sm" />} placeholder="Search your stars" style={{ width: 250 }} />
+      <Stack direction="column">
         <MultiSelect
-          variant="default"
           icon={
             <Icon size="sm">
               <LanguageIcon />
             </Icon>
           }
-          data={['React', 'Angular', 'Svelte', 'Vue', 'Riot', 'Next.js', 'Blitz.js']}
+          data={['React', 'Angular', 'Svelte', 'Vue']}
           placeholder="Pick all that you like"
-          defaultValue={['react', 'next']}
-          clearButtonLabel="Clear selection"
           clearable
+          style={{ width: 250 }}
         />
-      </FlexLayout>
-    </FlexLayout>
+      </Stack>
+    </Stack>
   );
 }

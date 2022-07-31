@@ -1,4 +1,4 @@
-import { VokerUiProvider } from '@lib/ui';
+import { UiProvider } from '@lib/ui';
 import { render, RenderOptions, waitFor } from '@testing-library/react';
 import { PropsWithChildren, ReactElement } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -7,14 +7,14 @@ export const queryClient = new QueryClient();
 
 function ProviderTestContainer({ children }: PropsWithChildren<unknown>) {
   return (
-    <VokerUiProvider>
+    <UiProvider>
       <QueryClientProvider client={queryClient} contextSharing={true}>
         {/* <Router location={location} key={location.current.pathname} routes={[]}>
           {children}
         </Router> */}
         {children}
       </QueryClientProvider>
-    </VokerUiProvider>
+    </UiProvider>
   );
 }
 

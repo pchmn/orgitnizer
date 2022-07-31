@@ -1,5 +1,5 @@
 import { AppLogo } from '@app/shared/components';
-import { FlexLayout, ToggleColorScheme } from '@lib/ui';
+import { Stack, ToggleColorScheme } from '@lib/ui';
 import { Header as MantineHeader, MantineTheme } from '@mantine/core';
 import * as React from 'react';
 
@@ -19,14 +19,14 @@ export function Header({ theme, left, right }: HeaderProps) {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0]
       }}
     >
-      <FlexLayout direction="row" alignItems="center" fullHeight growChildren>
+      <Stack direction="row" alignItems="center" fullHeight growChildren>
         {left}
-        <FlexLayout direction="row" justifyContent="space-between" fullHeight alignItems="center">
+        <Stack direction="row" justifyContent="space-between" fullHeight alignItems="center">
           <AppLogo direction="row" size="sm" />
           <ToggleColorScheme />
-        </FlexLayout>
+        </Stack>
         {right}
-      </FlexLayout>
+      </Stack>
     </MantineHeader>
   );
 }

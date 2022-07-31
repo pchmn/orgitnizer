@@ -1,6 +1,6 @@
 import { GithubIcon } from '@app/shared/components';
 import { SignInGenerics, useAuth, useEffectOnce } from '@lib/core';
-import { FlexLayout, useNotification } from '@lib/ui';
+import { Stack, useNotification } from '@lib/ui';
 import { Button, Text, Title } from '@mantine/core';
 import { useNavigate, useSearch } from '@tanstack/react-location';
 import { useState } from 'react';
@@ -42,7 +42,7 @@ export const SignIn = () => {
 
   return (
     <SignInLayout>
-      <FlexLayout alignItems="center" flexGrow={1} spacing={40} style={{ margin: '150px 0' }}>
+      <Stack alignItems="center" flexGrow={1} spacing={40} style={{ margin: '150px 0' }}>
         <Title style={{ margin: 0 }} align="center">
           {t('signIn.title')}
         </Title>
@@ -52,7 +52,7 @@ export const SignIn = () => {
         <Button onClick={githubSignIn} size="md" leftIcon={<GithubIcon />} loading={isLoading}>
           {t('signIn.signInWithGitHub')}
         </Button>
-      </FlexLayout>
+      </Stack>
     </SignInLayout>
   );
 };
