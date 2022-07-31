@@ -16,8 +16,7 @@ export function Header({ theme, left, right }: HeaderProps) {
       p="md"
       style={{
         position: 'sticky',
-        backgroundColor: theme.other.schemes[theme.colorScheme].surface1,
-        borderBottomColor: theme.other.schemes[theme.colorScheme].surface4
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0]
       }}
     >
       <FlexLayout direction="row" alignItems="center" fullHeight growChildren>

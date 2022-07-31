@@ -1,6 +1,6 @@
 import { MantineColor, MantineNumberSize, useMantineTheme } from '@mantine/core';
 
-interface IconProps {
+export interface IconProps {
   size?: MantineNumberSize;
   color?: string | MantineColor;
 }

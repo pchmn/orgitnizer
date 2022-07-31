@@ -1,48 +1,60 @@
-import { ButtonStylesParams, CSSObject, MantineTheme } from '@mantine/core';
-import { CustomColors, Scheme } from './mantine';
-
-export const defaultProps: Record<string, Record<string, unknown>> = {
-  Button: {
-    radius: 'xl'
-  }
-};
+import { CSSObject, MantineTheme } from '@mantine/core';
 
 export const themeStyles: Record<
   string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Record<string, CSSObject> | ((theme: MantineTheme, params: any) => Record<string, CSSObject>)
 > = {
-  Button: (theme, params: ButtonStylesParams) => ({
+  Button: () => ({
     filled: {
-      color: getOnColor(params.color as CustomColors, theme),
+      color: '#000',
+      transition: 'all 0.3s',
+      boxShadow:
+        'rgb(0 0 0 / 20%) 0px 1px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px',
       '&:hover': {
-        backgroundColor: theme.fn.darken(getColor(params.color as CustomColors, theme), 0.15)
-      }
-    },
-    outline: {
-      color: getColor(params.color as CustomColors, theme),
-      borderColor: theme.other.schemes[theme.colorScheme].outline
-    },
-    loading: {
-      cursor: 'not-allowed',
-      '& svg': {
-        stroke: getOnColor(params.color as CustomColors, theme)
+        boxShadow:
+          'rgb(0 0 0 / 20%) 0px 2px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px'
+      },
+      '&.mantine-Button-loading': {
+        cursor: 'not-allowed',
+        '& svg': {
+          stroke: '#000'
+        }
       }
     }
   }),
-  ActionIcon: (theme) => ({
-    hover: {
+  TextInput: (theme) => ({
+    input: {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      transition: 'border-color 0.25s, box-shadow 0.25s',
+      '&:focus': {
+        borderColor: `${theme.colors.violet[8]} !important`,
+        boxShadow: `0px 0px 1px 1px ${theme.fn.rgba(theme.colors.violet[8], 0.5)}`
+      },
       '&:hover': {
-        backgroundColor: theme.fn.rgba('#000', theme.colorScheme === 'dark' ? 0.25 : 0.05)
+        borderColor: theme.colors.dark[3]
       }
+    }
+  }),
+  MultiSelect: (theme) => ({
+    input: {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      transition: 'border-color 0.25s, box-shadow 0.25s',
+      '&:focus-within': {
+        borderColor: `${theme.colors.violet[8]} !important`,
+        boxShadow: `0px 0px 1px 1px ${theme.fn.rgba(theme.colors.violet[8], 0.5)}`,
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white
+      },
+      '&:hover': {
+        borderColor: theme.colors.dark[3]
+      }
+    },
+    dropdown: {
+      borderRadius: 8,
+      border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`
+    },
+    defaultValue: {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[1]
     }
   })
 };
-
-function getColor(color: CustomColors = 'primary', theme: MantineTheme): string {
-  return theme.other.schemes[theme.colorScheme][color];
-}
-
-function getOnColor(color: CustomColors = 'primary', theme: MantineTheme): string {
-  return theme.other.schemes[theme.colorScheme][`on${color.charAt(0).toUpperCase()}${color.slice(1)}` as keyof Scheme];
-}

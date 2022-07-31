@@ -3,3 +3,4 @@ node_modules
 .eslintcache
 .nvmrc
 *.code-workspace
+*.DS_Store

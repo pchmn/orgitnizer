@@ -1,15 +1,30 @@
-import { AppLayout, Header } from '@app/core/layout';
-import { useFirebaseAuth } from '@lib/core';
-import { Button, useMantineTheme } from '@mantine/core';
+import { FlexLayout, ToggleColorScheme } from '@lib/ui';
+import { useMediaQuery } from '@mantine/hooks';
 import { PropsWithChildren } from 'react';
+import { DrawerContent } from './Drawer/DrawerContent';
+import { MobileDrawer } from './Drawer/MobileDrawer';
 
 export function DashboardLayout({ children }: PropsWithChildren<unknown>) {
-  const theme = useMantineTheme();
-  const { signOut } = useFirebaseAuth();
+  const matches = useMediaQuery('(max-width: 755px)');
 
   return (
-    <AppLayout header={<Header theme={theme} right={<Button onClick={() => signOut()}>Sign out</Button>} />}>
-      {children}
-    </AppLayout>
+    <FlexLayout>
+      {matches && <MobileDrawer />}
+      <FlexLayout direction="row" style={{ minHeight: '100vh' }} spacing={0}>
+        {!matches && <DrawerContent />}
+        <FlexLayout style={{ height: '100vh', overflow: 'auto', flexGrow: 1 }} spacing={0}>
+          <div
+            style={{
+              flexGrow: 1,
+              position: 'relative',
+              padding: '30px'
+            }}
+          >
+            {children}
+            {!matches && <ToggleColorScheme style={{ position: 'absolute', top: 30, right: 30 }} />}
+          </div>
+        </FlexLayout>
+      </FlexLayout>
+    </FlexLayout>
   );
 }

@@ -1,23 +1,33 @@
 {
-  "name": "@orgitnizer/monorepo",
+  "name": "@orgitz/monorepo",
   "version": "0.0.0",
   "private": true,
   "description": "Organize your git projects (repos, gists, stars)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pchmn/orgitnizer.git"
+    "url": "git+https://github.com/pchmn/orgitz.git"
   },
   "author": "pchmn",
   "license": "MIT",
-  "homepage": "https://github.com/pchmn/orgitnizer",
+  "homepage": "https://github.com/pchmn/orgitz",
   "scripts": {
-    "dev:web": "pnpm --filter @orgitnizer/web run dev",
-    "build:web": "pnpm --filter @orgitnizer/web run build",
-    "serve:web": "pnpm --filter @orgitnizer/web run serve",
-    "test:web": "pnpm --filter @orgitnizer/web run test:int",
-    "build:ci": "tsc && vite build && cp 404.html dist/",
-    "test:ci": "jest --coverage",
+    "dev:web": "pnpm --filter @orgitz/web run dev",
+    "build:web": "pnpm --filter @orgitz/web run build",
+    "serve:web": "pnpm --filter @orgitz/web run serve",
+    "test": "pnpm --filter @orgitz/web run test",
+    "test:web": "pnpm --filter @orgitz/web run test",
+    "test:web:watch": "pnpm --filter @orgitz/web run test:watch",
+    "test:web:ui": "pnpm --filter @orgitz/web run test:ui",
+    "test:web:ci": "pnpm --filter @orgitz/web run test:ci",
+    "build:functions": "pnpm --filter @orgitz/functions run build",
+    "test:functions": "pnpm --filter @orgitz/functions run test",
+    "test:functions:ci": "pnpm --filter @orgitz/functions run test:ci",
+    "build:cli": "pnpm --filter @orgitz/cli run build",
     "prepare": "husky install && rm -rf .git/hooks && ln -s ../.husky .git/hooks",
+    "build-docker": "cd appwrite && docker-compose pull orgitz-web && docker-compose up",
+    "start-docker": "cd appwrite && docker-compose pull orgitz-web && docker-compose up -d --remove-orphans --renew-anon-volumes",
+    "stop-docker": "cd appwrite && docker-compose stop",
+    "rm-docker": "cd appwrite && docker-compose rm",
     "lint": "eslint --cache --fix ."
   },
   "devDependencies": {
@@ -36,7 +46,9 @@
     "eslint-plugin-testing-library": "^4.12.4",
     "husky": "^7.0.2",
     "lint-staged": "^11.2.3",
-    "prettier": "2.4.1",
-    "typescript": "^4.6.3"
+    "prettier": "2.4.1"
+  },
+  "dependencies": {
+    "@orgitz/cli": "^0.0.0"
   }
 }

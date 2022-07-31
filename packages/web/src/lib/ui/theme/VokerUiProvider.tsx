@@ -5,12 +5,14 @@ import {
   MantineColor,
   MantineProvider,
   MantineThemeOverride,
-  TypographyStylesProvider
+  TypographyStylesProvider,
+  useMantineTheme
 } from '@mantine/core';
 import { useColorScheme, useLocalStorage } from '@mantine/hooks';
 import { NotificationsProvider } from '@mantine/notifications';
 import { createContext, PropsWithChildren, useContext } from 'react';
-import { schemes, themeColors } from './colors';
+import { ThemeProvider } from 'styled-components';
+import { themeColors } from './colors';
 import { themeStyles } from './theme';
 
 type ThemeSettingsContext = {
@@ -30,6 +32,7 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
     defaultValue: preferredColorScheme,
     getInitialValueInEffect: true
   });
+  const theme = useMantineTheme();
 
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
@@ -40,30 +43,31 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
         theme={{
           colorScheme,
           colors: themeColors,
-          primaryColor: 'primary',
-          primaryShade: { light: 6, dark: 2 },
-          other: schemes,
+          primaryColor: 'violet',
           fontFamily: '"Readex Pro", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
           headings: {
             fontFamily: '"Readex Pro", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
           },
-          defaultRadius: 'md'
+          defaultRadius: 'md',
+          breakpoints: {
+            sm: 755
+          }
         }}
         styles={themeStyles}
-        // defaultProps={defaultProps}
       >
         <NotificationsProvider>
           <Global
             styles={(theme) => ({
               body: {
                 ...theme.fn.fontStyles(),
-                backgroundColor: theme.other.schemes[theme.colorScheme].background,
-                color: theme.other.schemes[theme.colorScheme].onBackground,
+                backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
                 WebkitFontSmoothing: 'antialiased'
               }
             })}
           />
-          <TypographyStylesProvider>{children}</TypographyStylesProvider>
+          <TypographyStylesProvider>
+            <ThemeProvider theme={{ ...theme, colorScheme }}>{children}</ThemeProvider>
+          </TypographyStylesProvider>
         </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>

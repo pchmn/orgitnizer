@@ -1,18 +1,25 @@
-/// <reference types="vitest" />
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/orgitnizer/',
-  plugins: [react(), tsconfigPaths()],
+  plugins: [
+    react({
+      // jsxImportSource: '@welldone-software/why-did-you-render' // <-----
+    }),
+    tsconfigPaths()
+  ],
   build: {
     sourcemap: true
   },
+  server: {
+    port: 3000
+  },
   test: {
-    environment: 'jsdom',
+    environment: 'happy-dom',
     globals: true,
-    setupFiles: './src/setupTests.ts'
+    setupFiles: './src/test/setupTests.ts',
+    clearMocks: true
   }
 });

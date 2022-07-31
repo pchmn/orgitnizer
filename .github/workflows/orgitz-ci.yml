@@ -1,0 +1,198 @@
+name: Orgitz CI
+
+on:
+  push:
+    # Run on all branches
+    branches:
+      - "**"
+    # Run only if files modified are not docs
+    paths-ignore:
+      - "*.md"
+  pull_request:
+    # Run on all branches
+    branches:
+      - "**"
+    # Run only if files modified are not docs
+    paths-ignore:
+      - "*.md"
+
+env:
+  GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+  VITE_APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+  VITE_APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+  APPWRITE_ENDPOINT: ${{ secrets.APPWRITE_ENDPOINT }}
+  APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_PROJECT_ID }}
+  APPWRITE_API_KEY: ${{ secrets.APPWRITE_API_KEY }}
+
+jobs:
+
+  # Build & Test Web
+  buildAndTestWeb:
+    name: (WEB) Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # - name: Get Web changed files
+      #   id: changed-files-web
+      #   uses: tj-actions/changed-files@v23
+      #   with:
+      #     files: |
+      #       !*.md
+      #       packages/web/**
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # pnpm cache
+      - uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      # Install
+      - name: Install
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.32.3
+          run_install: true
+
+      # Build
+      - name: Build
+        run: pnpm build:web
+
+      # Test
+      - name: Test
+        run: pnpm test:web:ci
+
+      # Upload dist artifacts
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist-web
+          path: packages/web/dist/
+
+  # Build & Test Functions
+  buildAndTestFunctions:
+    name: (FUNCTIONS) Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # pnpm cache
+      - uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      # Install
+      - name: Install
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.32.3
+          run_install: true
+
+      # Build
+      - name: Build
+        run: pnpm build:functions
+
+      # Test
+      - name: Test
+        run: pnpm test:functions:ci
+
+      # Upload dist artifacts
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist-functions
+          path: packages/functions/dist/
+
+  # Publish web container
+  publishWebDockerImage:
+    name: (WEB) Publish Docker Image
+    needs: buildAndTestWeb
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Download dist artifacts
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist-web
+          path: packages/web/dist/
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ env.GITHUB_TOKEN }}
+
+      - name: Build and Publish Image
+        uses: docker/build-push-action@v3
+        with:
+          context: packages/web/
+          push: true
+          tags: ghcr.io/pchmn/orgitz-web:latest
+
+  # Deploy App
+  deploy:
+    name: Deploy
+    needs: [buildAndTestFunctions, publishWebDockerImage]
+    runs-on: ubuntu-latest
+    environment:
+      name: orgitz.deploy
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: App docker-compose up
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          envs: GITHUB_TOKEN
+          script: |
+            echo $GITHUB_TOKEN | docker login ghcr.io -u pchmn --password-stdin
+            cd appwrite
+            sudo docker-compose pull orgitz-web
+            sudo docker-compose up -d --remove-orphans --renew-anon-volumes
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # pnpm cache
+      - uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      # Install
+      - name: Install
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 6.32.3
+          run_install: true
+
+      # Download dist function artifacts
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist-functions
+          path: packages/functions/dist/
+
+      # Deploy functions
+      - name: Deploy functions
+        run: |
+          pnpm build:cli
+          pnpm link @orgitz/cli
+          pnpm orgitz function deploy all

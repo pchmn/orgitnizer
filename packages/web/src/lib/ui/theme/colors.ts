@@ -1,138 +1,19 @@
-import { MantineThemeColors, MantineThemeOther } from '@mantine/core';
+import { MantineThemeColors } from '@mantine/core';
 
-export const themeColors: MantineThemeColors = {
-  primary: [
-    '#FFECEA',
-    '#FFDAD7',
-    '#FFB3B1',
-    '#FB8A89',
-    '#DB7271',
-    '#BB5959',
-    '#9C4142',
-    '#7E2A2D',
-    '#5F1318',
-    '#400006'
+export const themeColors: Partial<MantineThemeColors> = {
+  teal: ['#ccf0e8', '#b3e8dd', '#99e1d2', '#80d9c7', '#66d1bb', '#4dcab0', '#33c2a5', '#1abb99', '#00b38e', '#00a180'],
+  violet: [
+    '#f4ebff',
+    '#efe1ff',
+    '#e9d7ff',
+    '#e4cdff',
+    '#dec3fe',
+    '#d9b9fe',
+    '#d3affe',
+    '#cea5fe',
+    '#c89bfe',
+    '#b48ce5'
   ],
-  secondary: [
-    '#FFECEA',
-    '#FFDAD8',
-    '#E7BDBB',
-    '#C9A2A0',
-    '#AD8786',
-    '#916E6D',
-    '#765655',
-    '#5D3F3E',
-    '#442929',
-    '#2D1515'
-  ],
-  tertiary: [
-    '#FFEED5',
-    '#FFDEA8',
-    '#E3C18C',
-    '#C6A674',
-    '#AA8C5C',
-    '#8F7345',
-    '#745A2F',
-    '#5A431A',
-    '#412D05',
-    '#281900'
-  ],
-  neutral: [
-    '#FBEEED',
-    '#ECDFDE',
-    '#D0C3C2',
-    '#B4A8A7',
-    '#998E8D',
-    '#7F7574',
-    '#655C5B',
-    '#4D4545',
-    '#362F2E',
-    '#201A1A'
-  ],
-  neutralVariant: [
-    '#FFEDEC',
-    '#F4DDDC',
-    '#D7C1C0',
-    '#BBA6A5',
-    '#9F8C8B',
-    '#857372',
-    '#6B5A59',
-    '#534342',
-    '#3B2D2C',
-    '#251818'
-  ],
-  error: ['#FFEDE9', '#FFDAD4', '#FFB4A9', '#FF897A', '#FF5449', '#DD3730', '#BA1B1B', '#930006', '#680003', '#410001']
-};
-
-export const schemes: MantineThemeOther = {
-  schemes: {
-    light: {
-      primary: themeColors.primary[6],
-      onPrimary: '#FFF',
-      primaryContainer: themeColors.primary[1],
-      onPrimaryContainer: themeColors.primary[9],
-      secondary: themeColors.secondary[6],
-      onSecondary: '#FFF',
-      secondaryContainer: themeColors.secondary[1],
-      onSecondaryContainer: themeColors.secondary[9],
-      tertiary: themeColors.tertiary[6],
-      onTertiary: '#FFF',
-      tertiaryContainer: themeColors.tertiary[1],
-      onTertiaryContainer: themeColors.tertiary[9],
-      error: themeColors.error[6],
-      onError: '#FFF',
-      errorContainer: themeColors.error[1],
-      onErrorContainer: themeColors.error[9],
-      background: '#FCFCFC',
-      onBackground: themeColors.neutral[9],
-      surface: '#FCFCFC',
-      surface1: '#F7F2F2',
-      surface2: '#F4EDED',
-      surface3: '#F1E7E7',
-      surface4: '#F0E5E5',
-      surface5: '#EEE1E1',
-      onSurface: themeColors.neutral[9],
-      surfaceVariant: themeColors.neutralVariant[1],
-      onSurfaceVariant: themeColors.neutralVariant[7],
-      outline: themeColors.neutralVariant[5],
-      shadow: '',
-      inverseSurface: '',
-      inverseOnSurface: '',
-      inversePrimary: ''
-    },
-    dark: {
-      primary: themeColors.primary[2],
-      onPrimary: themeColors.primary[8],
-      primaryContainer: themeColors.primary[7],
-      onPrimaryContainer: themeColors.primary[1],
-      secondary: themeColors.secondary[2],
-      onSecondary: themeColors.secondary[8],
-      secondaryContainer: themeColors.secondary[7],
-      onSecondaryContainer: themeColors.secondary[1],
-      tertiary: themeColors.tertiary[2],
-      onTertiary: themeColors.tertiary[8],
-      tertiaryContainer: themeColors.tertiary[7],
-      onTertiaryContainer: themeColors.tertiary[1],
-      error: themeColors.error[2],
-      onError: themeColors.error[8],
-      errorContainer: themeColors.error[7],
-      onErrorContainer: themeColors.error[1],
-      background: themeColors.neutral[9],
-      onBackground: themeColors.neutral[1],
-      surface: themeColors.neutral[9],
-      surface1: '#2B2222',
-      surface2: '#312626',
-      surface3: '#382B2A',
-      surface4: '#3B2C2C',
-      surface5: '#2C2C2C',
-      onSurface: themeColors.neutral[2],
-      surfaceVariant: themeColors.neutralVariant[7],
-      onSurfaceVariant: themeColors.neutralVariant[2],
-      outline: themeColors.neutralVariant[4],
-      shadow: '',
-      inverseSurface: '',
-      inverseOnSurface: '',
-      inversePrimary: ''
-    }
-  }
+  blue: ['#dcecff', '#cbe3ff', '#b9daff', '#a8d1ff', '#96c7ff', '#85beff', '#73b5ff', '#62abff', '#50a2ff', '#4892e6'],
+  purple: ['#ebdef0', '#e1cde9', '#d7bde2', '#cdacdb', '#c39bd3', '#b98bcc', '#af7ac5', '#a56abd', '#9b59b6', '#8c50a4']
 };

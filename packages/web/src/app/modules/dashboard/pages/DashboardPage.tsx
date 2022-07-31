@@ -1,5 +1,5 @@
-import { DashboardLayout } from '../layout';
+import { Dashboard } from '../components/Dashboard';
 
 export function DashboardPage() {
-  return <DashboardLayout>Hello from DashboardPage</DashboardLayout>;
+  return <Dashboard />;
 }
