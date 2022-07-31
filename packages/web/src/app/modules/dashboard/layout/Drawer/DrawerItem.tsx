@@ -1,7 +1,7 @@
-import { FlexLayout } from '@lib/ui';
+import styled from '@emotion/styled';
+import { Stack } from '@lib/ui';
 import { Text } from '@mantine/core';
 import { Link } from '@tanstack/react-location';
-import styled from 'styled-components';
 import { useDrawer } from './DrawerContext';
 
 interface DrawerItemProps {
@@ -11,7 +11,7 @@ interface DrawerItemProps {
   label: string;
 }
 
-const DrawerItemContainer = styled(FlexLayout)<{ isActive?: boolean }>(({ isActive, theme }) => ({
+const DrawerItemContainer = styled(Stack)<{ isActive?: boolean }>(({ isActive, theme }) => ({
   backgroundColor: isActive
     ? theme.colorScheme === 'dark'
       ? theme.colors.dark[5]

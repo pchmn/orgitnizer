@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import { MantineNumberSize, useMantineTheme } from '@mantine/core';
 import * as React from 'react';
-import styled from 'styled-components';
 
 const sizes = {
   xs: 32,
