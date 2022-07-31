@@ -23,9 +23,9 @@
   },
   "dependencies": {
     "@firebase/rules-unit-testing": "^2.0.2",
-    "@mantine/core": "^5.0.2",
-    "@mantine/hooks": "^5.0.2",
-    "@mantine/notifications": "^5.0.2",
+    "@mantine/core": "^4.2.2",
+    "@mantine/hooks": "^4.2.2",
+    "@mantine/notifications": "^4.2.4",
     "@tanstack/react-location": "^3.7.4",
     "add": "^2.0.6",
     "appwrite": "^8.0.1",
