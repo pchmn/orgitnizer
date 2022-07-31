@@ -116,6 +116,7 @@ jobs:
 
   # Publish web container
   publishWebDockerImage:
+    if: github.ref_name == 'main'
     name: (WEB) Publish Docker Image
     needs: buildAndTestWeb
     runs-on: ubuntu-latest
@@ -144,6 +145,7 @@ jobs:
 
   # Deploy App
   deploy:
+    if: github.ref_name == 'main'
     name: Deploy
     needs: [buildAndTestFunctions, publishWebDockerImage]
     runs-on: ubuntu-latest
