@@ -1,7 +1,10 @@
-import { useAuth } from '@lib/core';
+import { Outlet } from '@tanstack/react-location';
+import { DashboardLayout } from '../layout';
 
 export function Dashboard() {
-  const { currentUser } = useAuth();
-
-  return <>Hello {currentUser?.name}</>;
+  return (
+    <DashboardLayout>
+      <Outlet />
+    </DashboardLayout>
+  );
 }

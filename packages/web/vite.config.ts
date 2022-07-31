@@ -6,7 +6,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [
     react({
-      jsxImportSource: '@welldone-software/why-did-you-render' // <-----
+      // jsxImportSource: '@welldone-software/why-did-you-render' // <-----
     }),
     tsconfigPaths()
   ],

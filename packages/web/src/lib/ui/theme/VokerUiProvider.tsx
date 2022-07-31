@@ -48,7 +48,10 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
           headings: {
             fontFamily: '"Readex Pro", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif'
           },
-          defaultRadius: 'md'
+          defaultRadius: 'md',
+          breakpoints: {
+            sm: 755
+          }
         }}
         styles={themeStyles}
       >
@@ -63,7 +66,7 @@ export function VokerUiProvider({ children }: PropsWithChildren<unknown>) {
             })}
           />
           <TypographyStylesProvider>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <ThemeProvider theme={{ ...theme, colorScheme }}>{children}</ThemeProvider>
           </TypographyStylesProvider>
         </NotificationsProvider>
       </MantineProvider>

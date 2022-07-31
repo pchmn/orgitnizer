@@ -22,5 +22,39 @@ export const themeStyles: Record<
         }
       }
     }
+  }),
+  TextInput: (theme) => ({
+    input: {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      transition: 'border-color 0.25s, box-shadow 0.25s',
+      '&:focus': {
+        borderColor: `${theme.colors.violet[8]} !important`,
+        boxShadow: `0px 0px 1px 1px ${theme.fn.rgba(theme.colors.violet[8], 0.5)}`
+      },
+      '&:hover': {
+        borderColor: theme.colors.dark[3]
+      }
+    }
+  }),
+  MultiSelect: (theme) => ({
+    input: {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+      transition: 'border-color 0.25s, box-shadow 0.25s',
+      '&:focus-within': {
+        borderColor: `${theme.colors.violet[8]} !important`,
+        boxShadow: `0px 0px 1px 1px ${theme.fn.rgba(theme.colors.violet[8], 0.5)}`,
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white
+      },
+      '&:hover': {
+        borderColor: theme.colors.dark[3]
+      }
+    },
+    dropdown: {
+      borderRadius: 8,
+      border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`
+    },
+    defaultValue: {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[1]
+    }
   })
 };

@@ -3,6 +3,14 @@ import { MantineNumberSize, Title } from '@mantine/core';
 import styled, { keyframes } from 'styled-components';
 import { DynamicLogo } from './DynamicLogo';
 
+// const sizes = {
+//   xs: 32,
+//   sm: 14,
+//   md: 18,
+//   lg: 28,
+//   xl: 110
+// };
+
 const scale = keyframes({
   '0%': {
     transform: 'scale(0)'
@@ -69,7 +77,7 @@ export function AppLogo({ direction = 'column', size = 'sm', animate = false, on
         animate={+animate}
         order={size === 'sm' ? 3 : 2}
         onAnimationEnd={onAnimationEnd}
-        style={{ fontFamily: "'JetBrains Mono', monospace" }}
+        style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: size === 'xs' ? 18 : 20 }}
       >
         Orgitz
       </AppName>

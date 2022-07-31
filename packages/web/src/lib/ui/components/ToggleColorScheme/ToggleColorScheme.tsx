@@ -1,11 +1,11 @@
 import { ActionIcon, useMantineColorScheme } from '@mantine/core';
 import { Icon } from '../Icon/Icon';
 
-export function ToggleColorScheme() {
+export function ToggleColorScheme({ style }: { style?: React.CSSProperties }) {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (
-    <ActionIcon onClick={() => toggleColorScheme()}>
+    <ActionIcon onClick={() => toggleColorScheme()} style={style}>
       <Icon>{colorScheme === 'dark' ? <SunIcon /> : <MoonIcon />}</Icon>
     </ActionIcon>
   );
