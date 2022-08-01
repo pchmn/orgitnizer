@@ -1,12 +1,13 @@
 {
   "functions": [
     {
-      "$id": "set-github-username",
-      "name": "set-github-username",
+      "$id": "updateAccountProfile",
+      "name": "updateAccountProfile",
       "runtime": "node-16.0",
       "path": "packages/functions/dist",
-      "entrypoint": "set-github-username.js",
+      "entrypoint": "updateAccountProfile.js",
       "ignore": [
+        "set-github-username.js"
       ],
       "execute": [
         "role:member"

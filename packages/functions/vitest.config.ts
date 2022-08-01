@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
-    setupFiles: './src/test/setupTests.ts',
+    setupFiles: './src/__test__/setupTests.ts',
     clearMocks: true
   }
 });
