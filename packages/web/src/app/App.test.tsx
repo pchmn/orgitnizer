@@ -1,7 +1,7 @@
 import App from '@app/App';
-import { mockAppwriteAccount } from '@test/mocks/appwriteMock';
-import { renderWithProviders } from '@test/test.utils';
 import { waitFor } from '@testing-library/react';
+import { mockAppwriteAccount } from 'src/__test__/mocks/appwriteMock';
+import { renderWithProviders } from 'src/__test__/test.utils';
 
 describe('App', () => {
   test('should render', async () => {
