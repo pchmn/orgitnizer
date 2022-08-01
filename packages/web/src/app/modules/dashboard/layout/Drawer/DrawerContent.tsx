@@ -1,7 +1,8 @@
 import { AppLogo, RepositoryIcon, StarIcon } from '@app/shared/components';
 import { Stack } from '@lib/ui';
-import { Navbar } from '@mantine/core';
+import { Divider, Navbar, Space } from '@mantine/core';
 import { DrawerItem } from './DrawerItem';
+import { User } from './User';
 
 export function DrawerContent({ showAppLogo = true }: { showAppLogo?: boolean }) {
   return (
@@ -24,7 +25,11 @@ export function DrawerContent({ showAppLogo = true }: { showAppLogo?: boolean })
           <DrawerItem to="/dashboard/repositories" icon={<RepositoryIcon size={22} />} label="My Repositories" />
         </Stack>
       </Navbar.Section>
-      <Navbar.Section>{/* Footer with user */}</Navbar.Section>
+      <Navbar.Section>
+        <Divider />
+        <Space h="lg" />
+        <User />
+      </Navbar.Section>
     </Navbar>
   );
 }

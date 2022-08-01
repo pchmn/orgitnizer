@@ -13,8 +13,11 @@ export async function run() {
     switch (domain) {
       case 'function':
         await functionCli(method, params);
+        break;
+      default:
+        console.error('\x1b[31m', `Unknown param ${domain}`);
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('\x1b[31m', `\u26A0 ${err}`);
   }
 }

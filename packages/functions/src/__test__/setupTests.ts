@@ -12,14 +12,15 @@ export const requestMock: Request = {
 };
 
 export const graphqlMock = vi.fn();
-
 export const updateNameMock = vi.fn();
+export const updatePrefsMock = vi.fn();
 
 vi.mock('@core/appwrite/initSdk', () => {
   return {
     initSdk: vi.fn().mockReturnValue({
       account: {
-        updateName: updateNameMock
+        updateName: updateNameMock,
+        updatePrefs: updatePrefsMock
       }
     })
   };
