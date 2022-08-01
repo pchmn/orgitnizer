@@ -2,8 +2,6 @@
 import fs from 'fs-extra';
 import { FunctionConfig } from '../models/functionConfig.model';
 
-const rootDirectory = `${__dirname}/../../..`;
-
 export async function runInitFunction(functionName: string) {
   initFunction(functionName);
   console.log('\x1b[32m', `\u2705 function ${functionName} initialized`);
@@ -19,8 +17,16 @@ function initFunction(functionName: string) {
 }
 
 function generateDefaultFiles(functionName: string) {
-  console.log(rootDirectory);
   fs.copySync(`${__dirname}/../src/init-function/defaultFiles`, `${__dirname}/../../functions/src/${functionName}`);
+  fs.renameSync(
+    `${__dirname}/../../functions/src/${functionName}/index.ts`,
+    `${__dirname}/../../functions/src/${functionName}/${functionName}.ts`
+  );
+  const indexContent = fs.readFileSync(`${__dirname}/../../functions/src/${functionName}/${functionName}.ts`, 'utf8');
+  fs.writeFileSync(
+    `${__dirname}/../../functions/src/${functionName}/${functionName}.ts`,
+    indexContent.replace('index', functionName)
+  );
 }
 
 function updateFunctionsPackageJson(functionName: string) {
@@ -30,7 +36,7 @@ function updateFunctionsPackageJson(functionName: string) {
   packageJson.scripts.build = [...new Set(buildArray)].join(' && ');
   packageJson.scripts[
     `build-${functionName}`
-  ] = `esbuild src/${functionName}/index.ts --bundle --minify --platform=node --target=node16.0 --outfile=dist/${functionName}.js && tar -czvf dist/${functionName}.tar.gz dist/${functionName}.js`;
+  ] = `esbuild src/${functionName}/${functionName}.ts --bundle --minify --platform=node --target=node16.0 --outfile=dist/${functionName}.js && tar -czvf dist/${functionName}.tar.gz --directory=dist ${functionName}.js`;
   fs.writeFileSync(`${__dirname}/../../functions/package.json`, JSON.stringify(packageJson, null, 2));
 }
 
@@ -58,5 +64,3 @@ function updateAppWriteJson(functionName: string) {
   });
   fs.writeFileSync(`${__dirname}/../../../appwrite.json`, JSON.stringify(appwriteJson, null, 2));
 }
-
-// run();

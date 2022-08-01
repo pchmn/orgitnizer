@@ -48,7 +48,6 @@ async function createFunctionIfNotExists(functionToDeploy: FunctionConfig) {
   try {
     await functions.get(functionToDeploy.name);
   } catch (err: any) {
-    // console.log(err);
     if (err.code === 404) {
       await functions.create(
         functionToDeploy.$id,
