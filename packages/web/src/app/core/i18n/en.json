@@ -34,5 +34,10 @@
       "message": "An error occured while signing in to your GitHub account",
       "messageRefused": "You have refused the access to your GitHub account"
     }
+  },
+  "dashboard": {
+    "drawer": {
+      "signOut": "Sign Out"
+    }
   }
 }

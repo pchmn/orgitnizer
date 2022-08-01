@@ -3,29 +3,36 @@ import { CSSObject, MantineTheme } from '@mantine/core';
 interface ThemeComponent {
   defaultProps?: Record<string, unknown>;
   classNames?: Record<string, string>;
-  styles?: Record<string, CSSObject> | ((theme: MantineTheme, params: unknown) => Record<string, CSSObject>);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  styles?: Record<string, CSSObject> | ((theme: MantineTheme, params: any) => Record<string, CSSObject>);
 }
 
 export const componentsTheme: Record<string, ThemeComponent> = {
   Button: {
-    styles: {
-      filled: {
-        color: '#000',
+    styles: (theme, params) => ({
+      root: {
         transition: 'all 0.25s',
         boxShadow:
-          'rgb(0 0 0 / 20%) 0px 1px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px',
+          params.variant === 'filled'
+            ? 'rgb(0 0 0 / 20%) 0px 1px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px'
+            : undefined,
         '&:hover': {
           boxShadow:
-            'rgb(0 0 0 / 20%) 0px 2px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px'
-        },
-        '&.mantine-Button-loading': {
-          cursor: 'not-allowed',
-          '& svg': {
-            stroke: '#000'
-          }
+            params.variant === 'filled'
+              ? 'rgb(0 0 0 / 20%) 0px 2px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px'
+              : undefined
+        }
+      },
+      label: {
+        color: params.variant === 'filled' ? theme.black : undefined
+      },
+      icon: {
+        color: params.variant === 'filled' ? theme.black : undefined,
+        '& svg': {
+          stroke: params.variant === 'filled' ? theme.black : undefined
         }
       }
-    }
+    })
   },
   Input: {
     styles: (theme) => ({
@@ -37,6 +44,13 @@ export const componentsTheme: Record<string, ThemeComponent> = {
         '&:hover': {
           borderColor: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[6]
         }
+      }
+    })
+  },
+  ActionIcon: {
+    styles: (theme) => ({
+      root: {
+        color: theme.colorScheme === 'dark' ? theme.white : theme.colors.gray[7]
       }
     })
   }

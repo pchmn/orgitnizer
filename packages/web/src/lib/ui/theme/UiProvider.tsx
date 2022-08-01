@@ -62,7 +62,6 @@ export function UiProvider({ children }: PropsWithChildren<unknown>) {
           <Global
             styles={(theme: MantineTheme) => ({
               body: {
-                ...theme.fn.fontStyles(),
                 backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
                 WebkitFontSmoothing: 'antialiased'
               }

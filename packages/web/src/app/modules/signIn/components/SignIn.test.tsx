@@ -1,9 +1,9 @@
 import { appwrite, callFunction } from '@lib/core';
 import { showNotification } from '@mantine/notifications';
-import { currentUser, mockAppwriteAccount } from '@test/mocks/appwriteMock';
-import { mockNavigate, mockUseSearch } from '@test/mocks/reactLocationMock';
-import { renderWithProviders } from '@test/test.utils';
 import { fireEvent, screen } from '@testing-library/react';
+import { currentUser, mockAppwriteAccount } from 'src/__test__/mocks/appwriteMock';
+import { mockNavigate, mockUseSearch } from 'src/__test__/mocks/reactLocationMock';
+import { renderWithProviders } from 'src/__test__/test.utils';
 import { SignIn } from './SignIn';
 
 describe('SignIn', () => {
@@ -43,11 +43,11 @@ describe('SignIn', () => {
     expect(mockNavigate).toHaveBeenCalledWith({ to: '/dashboard' });
   });
 
-  test('call set-github-username if no username', async () => {
+  test('call updateAccountProfile if no username', async () => {
     mockAppwriteAccount.mockReturnValue({ ...currentUser, name: undefined });
     mockUseSearch.mockReturnValue({ redirectResult: 'success' });
     await renderWithProviders(<SignIn />);
 
-    expect(callFunction).toHaveBeenCalledWith('set-github-username');
+    expect(callFunction).toHaveBeenCalledWith('updateAccountProfile');
   });
 });

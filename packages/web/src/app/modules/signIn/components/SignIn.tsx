@@ -29,6 +29,7 @@ export const SignIn = () => {
     } catch (err) {
       showError({ title: t('signIn.notificationError.title'), message: t('signIn.notificationError.message') });
     }
+    setIsLoading(false);
   };
 
   useEffectOnce(() => {
