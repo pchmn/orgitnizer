@@ -12,13 +12,12 @@ interface DrawerItemProps {
 }
 
 const DrawerItemContainer = styled(Stack)<{ isActive?: boolean }>(({ isActive, theme }) => ({
+  position: 'relative',
   backgroundColor: isActive
     ? theme.colorScheme === 'dark'
       ? theme.colors.dark[5]
       : theme.colors.gray[1]
-    : theme.colorScheme === 'dark'
-    ? theme.colors.dark[7]
-    : theme.white,
+    : 'transparent',
   borderRadius: theme.radius.md,
   padding: '8px 16px',
   color: isActive && theme.colorScheme === 'dark' ? theme.white : 'inherit',
@@ -26,6 +25,13 @@ const DrawerItemContainer = styled(Stack)<{ isActive?: boolean }>(({ isActive, t
   '&:hover': {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
   }
+  // '&::before': {
+  //   content: '""',
+  //   position: 'absolute',
+  //   left: 0,
+  //   width: '1px',
+  //   backgroundColor: 'green'
+  // }
 }));
 
 export function DrawerItem({ to, icon, label }: DrawerItemProps) {

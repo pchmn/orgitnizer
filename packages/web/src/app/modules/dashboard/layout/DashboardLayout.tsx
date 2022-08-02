@@ -11,7 +11,7 @@ export function DashboardLayout({ children }: PropsWithChildren<unknown>) {
     <Stack>
       {matches && <MobileDrawer />}
       <Stack direction="row" style={{ minHeight: '100vh' }} spacing={0}>
-        {!matches && <DrawerContent />}
+        {!matches && <DrawerContent isMobile={matches} />}
         <Stack style={{ height: '100vh', overflow: 'auto', flexGrow: 1 }} spacing={0}>
           <div
             style={{

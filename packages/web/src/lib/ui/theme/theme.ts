@@ -37,6 +37,7 @@ export const componentsTheme: Record<string, ThemeComponent> = {
   Input: {
     styles: (theme) => ({
       input: {
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
         transition: 'border-color 0.25s, box-shadow 0.25s',
         '&:focus-within': {
           borderColor: `${theme.colors.violet[8]} !important`
@@ -44,6 +45,13 @@ export const componentsTheme: Record<string, ThemeComponent> = {
         '&:hover': {
           borderColor: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[6]
         }
+      }
+    })
+  },
+  MultiSelect: {
+    styles: (theme) => ({
+      defaultValue: {
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
       }
     })
   },
