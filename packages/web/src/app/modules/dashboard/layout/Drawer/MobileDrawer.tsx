@@ -17,8 +17,15 @@ function Drawer() {
   const { opened, toggle } = useDrawer();
 
   return (
-    <MantineDrawer opened={opened} onClose={toggle} size="80%" overlayBlur={2} withCloseButton={false}>
-      <DrawerContent showAppLogo={false} />
+    <MantineDrawer
+      opened={opened}
+      onClose={toggle}
+      size="80%"
+      overlayBlur={2}
+      withCloseButton={false}
+      styles={{ drawer: { backgroundColor: 'transparent' } }}
+    >
+      <DrawerContent isMobile={true} />
     </MantineDrawer>
   );
 }
@@ -33,7 +40,7 @@ function Header() {
       p="md"
       style={{
         position: 'sticky',
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
         fontSize: '18px'
       }}
     >
