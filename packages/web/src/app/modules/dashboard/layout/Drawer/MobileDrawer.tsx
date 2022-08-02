@@ -40,7 +40,7 @@ function Header() {
       p="md"
       style={{
         position: 'sticky',
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
         fontSize: '18px'
       }}
     >
