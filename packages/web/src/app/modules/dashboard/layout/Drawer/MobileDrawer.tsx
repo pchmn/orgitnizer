@@ -17,8 +17,15 @@ function Drawer() {
   const { opened, toggle } = useDrawer();
 
   return (
-    <MantineDrawer opened={opened} onClose={toggle} size="80%" overlayBlur={2} withCloseButton={false}>
-      <DrawerContent showAppLogo={false} />
+    <MantineDrawer
+      opened={opened}
+      onClose={toggle}
+      size="80%"
+      overlayBlur={2}
+      withCloseButton={false}
+      styles={{ drawer: { backgroundColor: 'transparent' } }}
+    >
+      <DrawerContent isMobile={true} />
     </MantineDrawer>
   );
 }
